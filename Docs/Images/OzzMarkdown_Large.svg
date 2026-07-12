@@ -1,0 +1,27 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diag45" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0119FE"/>
+      <stop offset="60%" stop-color="#042EF2"/>
+      <stop offset="100%" stop-color="#559BFF"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="120" fill="url(#diag45)"/>
+
+  <!-- Left Bracket -->
+  <path d="M 128 928 L 128 96" stroke="#DBDBDB" stroke-width="96"/>
+  <path d="M 128 880 L 320 880" stroke="#DBDBDB" stroke-width="96"/>
+  <path d="M 128 144 L 320 144" stroke="#DBDBDB" stroke-width="96"/>
+  
+  <!-- Right Bracket -->
+  <path d="M 896 928 L 896 96" stroke="#DBDBDB" stroke-width="96"/>
+  <path d="M 896 880 L 704 880" stroke="#DBDBDB" stroke-width="96"/>
+  <path d="M 896 144 L 704 144" stroke="#DBDBDB" stroke-width="96"/>
+  
+  <!-- Chevron M -->
+  <path d="M 256 724 L 400 300" stroke="#DBDBDB" stroke-width="96" stroke-linecap="round"/>
+  <path d="M 512 724 L 400 300" stroke="#DBDBDB" stroke-width="96" stroke-linecap="round"/>
+  <path d="M 512 724 L 656 300" stroke="#DBDBDB" stroke-width="96" stroke-linecap="round"/>
+  <path d="M 768 724 L 656 300" stroke="#DBDBDB" stroke-width="96" stroke-linecap="round"/>
+</svg>
