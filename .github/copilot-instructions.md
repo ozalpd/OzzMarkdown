@@ -26,6 +26,9 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 | `MarkdownViewer` (`OzzWpf.Core.Controls`) | WPF `UserControl` wrapping a `WebView2` browser. Exposes `MarkdownContent` as a `DependencyProperty` (bindable) that re-renders via `MarkdownHtmlRenderer` whenever it changes. Constructor requires an `AbstractAppSettings` instance to resolve the settings folder name and initial theme. |
 | `AbstractAppSettings` (`OzzWpf.Core.Models`) | Abstract base for app settings: `MainWindowPosition`, `UiCulture`, `SelectedTheme`, and JSON persistence helpers (`Save`, `GetSettingsFilePath`). Subclasses provide `GetSettingsFolderName()` and app-specific settings file naming/singleton logic (see `OzzMarkdown.WPF.Models.AppSettings`). |
 | `WindowPosition` (`OzzWpf.Core.Models`) | Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it. |
+| `AbstractViewModel` (`OzzWpf.Core.ViewModels`) | Shared base ViewModel implementing `INotifyPropertyChanged`, with a `RaisePropertyChanged(string)` helper. Shared across WPF-based frontends. |
+| `RelayCommand` (`OzzWpf.Core.Commands`) | Shared `ICommand` implementation supporting sync and async delegates with an optional `CanExecute` predicate. |
+| `AppVersion` (`OzzWpf.Core.Models`) | Static helper exposing version/product metadata (`Version`, `FullVersion`, `Product`, `Copyright`, `Description`) read from assembly attributes. |
 
 ## Key Constraints
 
@@ -46,11 +49,10 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 
 ## WPF Frontend Notes (`OzzMarkdown.WPF`)
 
-- Base ViewModel: `AbstractViewModel` (implements `INotifyPropertyChanged`).
-- `RelayCommand` (`Commands/RelayCommand.cs`) supports sync and async delegates with optional `CanExecute`.
+- ViewModels derive from `OzzWpf.Core.ViewModels.AbstractViewModel`; commands use `OzzWpf.Core.Commands.RelayCommand`. Both live in `OzzWpf.Core` for reuse across WPF-based frontends/tools.
 - `MainViewModel` takes an `IFileDialogService` via constructor injection (with a parameterless overload defaulting to `Win32FileDialogService` for XAML/DataContext convenience).
 - `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init) extending `AbstractAppSettings`; persists settings as JSON to `%AppData%/OzzMarkdown/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
-- `AppVersion` (`Models/AppVersion.cs`): Internal static class; exposes version/product metadata read from assembly attributes.
+- App version/product metadata is read via `OzzWpf.Core.Models.AppVersion` (not project-local).
 - Shared WPF resources for the frontend live in `Resources/Styles.xaml` and `Resources/BootstrapIcons.xaml` (Bootstrap Icons v1.13.1, MIT, as `Geometry` resources for use in `Path` elements).
 - Controls that require constructor arguments (like `MarkdownViewer`) cannot be declared directly in XAML with a parameterless tag; instantiate them in code-behind and use `FrameworkElement.SetBinding` to bind their `DependencyProperty` values to the `DataContext` ViewModel.
 

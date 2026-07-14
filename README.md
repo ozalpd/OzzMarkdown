@@ -21,7 +21,8 @@ OzzMarkdown is a multi-frontend desktop utility targeting **.NET 10**.
 
 | Project            | Status      | Technology     |
 | :----------------- | :---------- | :------------- |
-| `OzzMarkdown.Core` | ✅ Available | Shared Library |
+| `OzzMarkdown.Core` | ✅ Available | Shared Library, all platforms |
+| `OzzWpf.Core` | ✅ Available | Shared Library, WPF only |
 | `OzzMarkdown.WPF`  | ✅ Available | WPF, MVVM      |
 | `OzzMarkdown.MAUI` | 🔜 Planned  | .NET MAUI      |
 
@@ -39,23 +40,24 @@ OzzMarkdown/
 │   └── MarkdownThemeProvider.cs  # Built-in theme registry (Light, etc.)
 │
 ├── OzzWpf.Core/               # Shared WPF building blocks (used by WPF-based frontends/tools)
-│   ├── Controls/
-│   │   └── MarkdownViewer.xaml(.cs)  # WebView2-based Markdown viewer control
-│   └── Models/
-│       ├── AbstractAppSettings.cs    # Base class for persisted app settings
-│       └── WindowPosition.cs         # Window geometry capture/restore helper
-│
-├── OzzMarkdown.WPF/            # WPF desktop frontend (MVVM)
 │   ├── Commands/
 │   │   └── RelayCommand.cs
+│   ├── Controls/
+│   │   └── MarkdownViewer.xaml(.cs)  # WebView2-based Markdown viewer control
 │   ├── Models/
-│   │   ├── AppSettings.cs        # Concrete, persisted app settings singleton
-│   │   └── AppVersion.cs         # Assembly version/metadata accessor
+│   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
+│   │   ├── AppVersion.cs             # Assembly version/metadata accessor
+│   │   └── WindowPosition.cs         # Window geometry capture/restore helper
+│   └── ViewModels/
+│       └── AbstractViewModel.cs
+│
+├── OzzMarkdown.WPF/            # WPF desktop frontend (MVVM)
+│   ├── Models/
+│   │   └── AppSettings.cs        # Concrete, persisted app settings singleton
 │   ├── Services/
 │   │   ├── IFileDialogService.cs     # Abstraction over native file dialogs
 │   │   └── Win32FileDialogService.cs # Win32-backed implementation
 │   ├── ViewModels/
-│   │   ├── AbstractViewModel.cs
 │   │   └── MainViewModel.cs
 │   ├── Resources/
 │   │   ├── Styles.xaml           # Shared control styles
