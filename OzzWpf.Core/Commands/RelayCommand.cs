@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace OzzMarkdown.WPF.Commands;
+namespace OzzWpf.Core.Commands;
 
 public class RelayCommand : ICommand
 {

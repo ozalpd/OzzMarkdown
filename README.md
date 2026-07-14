@@ -29,6 +29,44 @@ The core functionality lives in `OzzMarkdown.Core`, which is **platform-agnostic
 
 The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictionary and [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as WPF `Geometry` resources in `BootstrapIcons.xaml`. The MAUI frontend will mirror the same MVVM structure.
 
+## Project Structure
+
+```
+OzzMarkdown/
+├── OzzMarkdown.Core/         # Platform-agnostic Markdown rendering engine
+│   ├── MarkdownHtmlRenderer.cs   # Renders Markdown to a temp HTML file / virtual-host URL
+│   ├── MarkdownTheme.cs          # CSS theme record
+│   └── MarkdownThemeProvider.cs  # Built-in theme registry (Light, etc.)
+│
+├── OzzWpf.Core/               # Shared WPF building blocks (used by WPF-based frontends/tools)
+│   ├── Controls/
+│   │   └── MarkdownViewer.xaml(.cs)  # WebView2-based Markdown viewer control
+│   └── Models/
+│       ├── AbstractAppSettings.cs    # Base class for persisted app settings
+│       └── WindowPosition.cs         # Window geometry capture/restore helper
+│
+├── OzzMarkdown.WPF/            # WPF desktop frontend (MVVM)
+│   ├── Commands/
+│   │   └── RelayCommand.cs
+│   ├── Models/
+│   │   ├── AppSettings.cs        # Concrete, persisted app settings singleton
+│   │   └── AppVersion.cs         # Assembly version/metadata accessor
+│   ├── Services/
+│   │   ├── IFileDialogService.cs     # Abstraction over native file dialogs
+│   │   └── Win32FileDialogService.cs # Win32-backed implementation
+│   ├── ViewModels/
+│   │   ├── AbstractViewModel.cs
+│   │   └── MainViewModel.cs
+│   ├── Resources/
+│   │   ├── Styles.xaml           # Shared control styles
+│   │   └── BootstrapIcons.xaml   # Bootstrap Icons v1.13.1 as Geometry resources
+│   └── MainWindow.xaml(.cs)
+│
+├── OzzMarkdown.i18n/           # Shared localization (English + Turkish .resx)
+│
+└── OzzMarkdown.MAUI/           # 🔜 Planned .NET MAUI frontend
+```
+
 ## Getting Started
 
 1. Clone the repository:

@@ -1,6 +1,9 @@
 ﻿using OzzMarkdown.WPF.Models;
 using OzzMarkdown.WPF.ViewModels;
+using OzzWpf.Core.Controls;
+using OzzWpf.Core.Models;
 using System.Windows;
+using System.Windows.Data;
 
 namespace OzzMarkdown.WPF;
 
@@ -10,10 +13,15 @@ namespace OzzMarkdown.WPF;
 public partial class MainWindow : Window
 {
     private readonly AppSettings _appSettings = AppSettings.GetAppSettings();
+    private readonly MarkdownViewer _markdownViewer;
 
     public MainWindow()
     {
         InitializeComponent();
+
+        _markdownViewer = new MarkdownViewer(_appSettings);
+        MarkdownViewerHost.Content = _markdownViewer;
+
         SourceInitialized += MainWindow_SourceInitialized;
         Closing += MainWindow_Closing;
     }
@@ -22,7 +30,14 @@ public partial class MainWindow : Window
     {
         SourceInitialized -= MainWindow_SourceInitialized;
         Title = $"Ozz Markdown - v{AppVersion.Version}";
-        this.DataContext = new MainViewModel();
+
+        var viewModel = new MainViewModel();
+        DataContext = viewModel;
+
+        _markdownViewer.SetBinding(
+            MarkdownViewer.MarkdownContentProperty,
+            new Binding(nameof(MainViewModel.MarkdownContent)) { Source = viewModel });
+
         _appSettings.MainWindowPosition.SetWindowPositions(this);
     }
 

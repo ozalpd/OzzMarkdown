@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using System.Windows;
 using System.Xml.Serialization;
 
-namespace OzzMarkdown.WPF.Models;
+namespace OzzWpf.Core.Models;
 
 [SupportedOSPlatform("windows")]
 public class WindowPosition

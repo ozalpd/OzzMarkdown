@@ -1,30 +1,17 @@
-﻿using System.IO;
+﻿using OzzWpf.Core.Models;
+using System.IO;
 using System.Text.Json;
-using static System.Environment;
 
 namespace OzzMarkdown.WPF.Models;
 
-public class AppSettings
+public class AppSettings : AbstractAppSettings
 {
     private static AppSettings? _instance;
     private static readonly object _syncRoot = new();
 
-    private static string ozzContextGen = "OzzMarkdown";
+    private static string settingsFolderName = "OzzMarkdown";
     private static string settingsFileName = "wpfsettings.json";
 
-
-    /// <summary>
-    /// Gets or sets the position and size of the main application window.
-    /// </summary>
-    public WindowPosition MainWindowPosition { get; set; } = new WindowPosition();
-
-    /// <summary>
-    /// Gets or sets the BCP-47 culture name used for the application UI (e.g. <c>"en-US"</c>, <c>"tr-TR"</c>).
-    /// </summary>
-    /// <remarks>When empty, the operating system's current culture is used.</remarks>
-    public string UiCulture { get; set; } = string.Empty;
-
-    public string SelectedTheme { get; set; } = "Light";
 
     public static AppSettings GetAppSettings()
     {
@@ -40,7 +27,7 @@ public class AppSettings
                 return _instance;
             }
 
-            var settingsFilePath = GetSettingsFilePath();
+            var settingsFilePath = GetSettingsFilePath(settingsFolderName, settingsFileName);
             if (File.Exists(settingsFilePath))
             {
                 var settingsJson = File.ReadAllText(settingsFilePath);
@@ -64,18 +51,10 @@ public class AppSettings
         }
     }
 
-    private static string GetSettingsFilePath()
-    {
-        var settingsFolder = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), ozzContextGen);
-        Directory.CreateDirectory(settingsFolder);
-
-        return Path.Combine(settingsFolder, settingsFileName);
-    }
+    public override string GetSettingsFolderName() => settingsFolderName;
 
     public void Save()
     {
-        var settingsFilePath = GetSettingsFilePath();
-        var settingsJson = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(settingsFilePath, settingsJson);
+        Save(settingsFolderName, settingsFileName);
     }
 }

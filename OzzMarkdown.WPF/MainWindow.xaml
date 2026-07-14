@@ -3,10 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i18n="clr-namespace:OzzMarkdown.i18n;assembly=OzzMarkdown.i18n"
         xmlns:local="clr-namespace:OzzMarkdown.WPF"
         mc:Ignorable="d"
         Title="Ozz Markdown" Height="960" Width="1280">
-    <Grid>
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <!-- Toolbar -->
+            <RowDefinition Height="Auto"/>
+            <!-- Markdown Viewer -->
+            <RowDefinition Height="*"/>
+            <!-- Status Bar -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0">
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.OpenFile}"
+                    Command="{Binding OpenFileCommand}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource folder2-open}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
+        </ToolBar>
+
+        <ContentControl x:Name="MarkdownViewerHost" Grid.Row="1"/>
 
     </Grid>
 </Window>

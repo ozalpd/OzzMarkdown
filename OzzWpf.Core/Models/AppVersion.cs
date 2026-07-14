@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 
-namespace OzzMarkdown.WPF.Models;
+namespace OzzWpf.Core.Models;
 
 /// <summary>
 /// Provides application version information.
 /// </summary>
-internal static class AppVersion
+public static class AppVersion
 {
     /// <summary>
     /// Gets the version number (e.g., "1.1.0").
@@ -27,7 +27,7 @@ internal static class AppVersion
     public static string Product =>
         Assembly.GetExecutingAssembly()
             .GetCustomAttribute<AssemblyProductAttribute>()?
-            .Product ?? "OzzContextGen - LLM Context Packer";
+            .Product ?? string.Empty;
 
     /// <summary>
     /// Gets the copyright information.

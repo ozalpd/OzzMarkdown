@@ -1,18 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
 		<TargetFramework>net10.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-		<Version>0.0.1</Version>
-		<ApplicationIcon>Assets\icon-M-02.ico</ApplicationIcon>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Version>0.1.0</Version>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Content Include="Assets\icon-M-02.ico" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
@@ -20,8 +14,5 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\OzzMarkdown.Core\OzzMarkdown.Core.csproj" />
-	  <ProjectReference Include="..\OzzMarkdown.i18n\OzzMarkdown.i18n.csproj" />
-	  <ProjectReference Include="..\OzzWpf.Core\OzzWpf.Core.csproj" />
 	</ItemGroup>
-
 </Project>

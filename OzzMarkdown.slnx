@@ -1,7 +1,11 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".github/copilot-instructions.md" />
+    <File Path="CHANGELOG.md" />
     <File Path="README.md" />
   </Folder>
   <Project Path="OzzMarkdown.Core/OzzMarkdown.Core.csproj" />
+  <Project Path="OzzMarkdown.i18n/OzzMarkdown.i18n.csproj" Id="f0741cea-0728-4f5f-a16e-d01abefe2559" />
   <Project Path="OzzMarkdown.WPF/OzzMarkdown.WPF.csproj" />
+  <Project Path="OzzWpf.Core/OzzWpf.Core.csproj" Id="3de752b3-f6ff-4d9c-9a10-153f9fc991d8" />
 </Solution>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace OzzMarkdown.WPF.ViewModels;
+namespace OzzWpf.Core.ViewModels;
 
 public abstract class AbstractViewModel : INotifyPropertyChanged
 {

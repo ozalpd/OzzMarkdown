@@ -38,13 +38,20 @@ namespace OzzMarkdown.Core
             _tempHtmlFiles.Clear();
         }
 
-        public string TempFolder => Path.Combine(Path.GetTempPath(), TempFolderName);
+        public string TempFolder
+        {
+            get
+            {
+                string tmpFolder = Path.Combine(Path.GetTempPath(), TempFolderName);
+                if (!Directory.Exists(tmpFolder))
+                    Directory.CreateDirectory(tmpFolder);
+
+                return tmpFolder;
+            }
+        }
 
         public string RenderToTempFileUrl(string markdown, MarkdownTheme theme)
         {
-            if (!Directory.Exists(TempFolder))
-                Directory.CreateDirectory(TempFolder);
-
             string html = Markdown.ToHtml(markdown, _pipeline);
             string finalHtml = WrapHtml(html, theme.Css);
 
