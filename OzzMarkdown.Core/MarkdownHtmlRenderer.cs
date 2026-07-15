@@ -53,7 +53,7 @@ namespace OzzMarkdown.Core
         public string RenderToTempFileUrl(string markdown, MarkdownTheme theme)
         {
             string html = Markdown.ToHtml(markdown, _pipeline);
-            string finalHtml = WrapHtml(html, theme.Css);
+            string finalHtml = WrapHtml(html, theme);
 
             string tempHtmlFile = Path.Combine(TempFolder, $"markdown_{Guid.NewGuid():N}.html");
             File.WriteAllText(tempHtmlFile, finalHtml, System.Text.Encoding.UTF8);
@@ -63,15 +63,30 @@ namespace OzzMarkdown.Core
             return $"https://{VirtualHostName}/{fileName}";
         }
 
-        private string WrapHtml(string html, string css)
+        private string WrapHtml(string html, MarkdownTheme theme)
         {
+
             return $@"<!DOCTYPE html>
 <html>
 <head>
 <meta charset='utf-8'>
-<style>{css}</style>
+<style>
+{theme.Css}
+{theme.GetPrismCss()}
+</style>
 </head>
-<body>{html}</body>
+<body>
+{html}
+<script>
+{MarkdownThemeProvider.GetPrismJs()}
+document.querySelectorAll('pre code').forEach(block => {{
+    if (!block.className.includes('language-')) {{
+        block.classList.add('language-csharp'); // default fallback
+    }}
+}});
+Prism.highlightAll();
+</script>
+</body>
 </html>";
         }
     }

@@ -1,0 +1,62 @@
+[
+  {
+    "outputFileName": "Assets/prism.min.js",
+    "inputFiles": [
+      "Assets/prism.js"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism.min.css",
+    "inputFiles": [
+      "Assets/prism.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-dark.min.css",
+    "inputFiles": [
+      "Assets/prism-dark.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-solarized-light.min.css",
+    "inputFiles": [
+      "Assets/prism-solarized-light.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-coy.min.css",
+    "inputFiles": [
+      "Assets/prism-coy.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-duotone-light.min.css",
+    "inputFiles": [
+      "Assets/prism-duotone-light.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-material-light.min.css",
+    "inputFiles": [
+      "Assets/prism-material-light.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-coldark-cold.min.css",
+    "inputFiles": [
+      "Assets/prism-coldark-cold.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-vs.min.css",
+    "inputFiles": [
+      "Assets/prism-vs.css"
+    ]
+  },
+  {
+    "outputFileName": "Assets/prism-tomorrow-night.min.css",
+    "inputFiles": [
+      "Assets/prism-tomorrow-night.css"
+    ]
+  }
+]

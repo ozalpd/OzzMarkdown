@@ -35,6 +35,9 @@ The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictio
 ```
 OzzMarkdown/
 ├── OzzMarkdown.Core/         # Platform-agnostic Markdown rendering engine
+│   ├── Assets/                  # Embedded Prism.js syntax-highlighting assets (minified JS/CSS themes)
+│   ├── Helpers/
+│   │   └── ResourceLoader.cs    # Loads embedded resources (e.g., Prism.js assets) as strings
 │   ├── MarkdownHtmlRenderer.cs   # Renders Markdown to a temp HTML file / virtual-host URL
 │   ├── MarkdownTheme.cs          # CSS theme record
 │   └── MarkdownThemeProvider.cs  # Built-in theme registry (Light, etc.)

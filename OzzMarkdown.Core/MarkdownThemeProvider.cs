@@ -1,4 +1,6 @@
-﻿namespace OzzMarkdown.Core;
+﻿using OzzMarkdown.Core.Helpers;
+
+namespace OzzMarkdown.Core;
 
 public static class MarkdownThemeProvider
 {
@@ -15,13 +17,36 @@ public static class MarkdownThemeProvider
         return _themes.TryGetValue(name, out var theme) ? theme : _themes["Light"];
     }
 
+    public static string GetPrismJs()
+    {
+        return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism.min.js");
+    }
+
+    private static string GetPrismBaseCss()
+    {
+        return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism.min.css");
+    }
+
+    public static string GetPrismCss(this MarkdownTheme theme)
+    {
+        switch (theme.Name)
+        {
+            case "Dark":
+                return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-tomorrow-night.min.css");
+
+            case "WarmLight":
+                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-duotone-light.min.css")}";
+
+            default: //for Light theme also
+                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-vs.min.css")}";
+        }
+    }
 
     private static readonly Dictionary<string, MarkdownTheme> _themes = new Dictionary<string, MarkdownTheme> {
-    { "Light",
-            new MarkdownTheme("Light",  @"
+    { "Light", new MarkdownTheme("Light",  @"
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #ffffff;
+    background: #f8f8f8;
     color: #222;
     margin: 20px;
     line-height: 1.6;
@@ -68,8 +93,7 @@ blockquote {
     color: #555;
     margin-left: 0;
 }") },
-    { "Dark",
-            new MarkdownTheme("Dark", @"
+    { "Dark", new MarkdownTheme("Dark", @"
 body {
 	font-family: 'Segoe UI', sans-serif;
 	background: #1e1e1e;
@@ -118,11 +142,10 @@ blockquote {
 	color: #aaa;
 	margin-left: 0;
 }") },
-    { "WarmLight",
-            new MarkdownTheme("WarmLight", @"
+    { "WarmLight", new MarkdownTheme("WarmLight", @"
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #F7F4F1;
+    background: #E8DFDB;
     color: #2a2a2a;
     margin: 20px;
     line-height: 1.6;
