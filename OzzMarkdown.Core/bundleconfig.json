@@ -58,5 +58,11 @@
     "inputFiles": [
       "Assets/prism-tomorrow-night.css"
     ]
+  },
+  {
+    "outputFileName": "Assets/prism-ghcolors.min.css",
+    "inputFiles": [
+      "Assets/prism-ghcolors.css"
+    ]
   }
 ]

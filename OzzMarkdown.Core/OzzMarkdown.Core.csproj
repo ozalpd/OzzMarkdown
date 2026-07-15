@@ -23,6 +23,9 @@
 		<EmbeddedResource Include="Assets\prism-dark.min.css">
 			<DependentUpon>prism-dark.css</DependentUpon>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Assets\prism-ghcolors.min.css">
+			<DependentUpon>prism-ghcolors.css</DependentUpon>
+		</EmbeddedResource>
 		<EmbeddedResource Include="Assets\prism-duotone-light.min.css">
 			<DependentUpon>prism-duotone-light.css</DependentUpon>
 		</EmbeddedResource>

@@ -35,7 +35,7 @@ public static class MarkdownThemeProvider
                 return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-tomorrow-night.min.css");
 
             case "WarmLight":
-                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-duotone-light.min.css")}";
+                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-ghcolors.min.css")}";
 
             default: //for Light theme also
                 return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-vs.min.css")}";
