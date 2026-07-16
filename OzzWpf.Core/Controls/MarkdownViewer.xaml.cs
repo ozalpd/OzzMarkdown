@@ -26,6 +26,19 @@ public partial class MarkdownViewer : System.Windows.Controls.UserControl
 
     public AbstractAppSettings AppSettings { get; }
 
+    public static readonly System.Windows.DependencyProperty GenerateTocProperty =
+        System.Windows.DependencyProperty.Register(
+            nameof(GenerateToc),
+            typeof(bool),
+            typeof(MarkdownViewer),
+            new System.Windows.PropertyMetadata(false, OnGenerateTocChanged));
+
+    public bool GenerateToc
+    {
+        get => (bool)GetValue(GenerateTocProperty);
+        set => SetValue(GenerateTocProperty, value);
+    }
+
     public static readonly System.Windows.DependencyProperty MarkdownContentProperty =
         System.Windows.DependencyProperty.Register(
             nameof(MarkdownContent),
@@ -37,6 +50,14 @@ public partial class MarkdownViewer : System.Windows.Controls.UserControl
     {
         get => (string?)GetValue(MarkdownContentProperty);
         set => SetValue(MarkdownContentProperty, value);
+    }
+
+    private static void OnGenerateTocChanged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChangedEventArgs e)
+    {
+        if (d is MarkdownViewer viewer)
+        {
+            viewer.LoadMarkdown();
+        }
     }
 
     private static void OnMarkdownContentChanged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChangedEventArgs e)
@@ -86,7 +107,7 @@ public partial class MarkdownViewer : System.Windows.Controls.UserControl
         if (Browser.CoreWebView2 == null || string.IsNullOrEmpty(MarkdownContent))
             return;
 
-        string fileUrl = mdRenderer.RenderToTempFileUrl(MarkdownContent, Theme);
+        string fileUrl = mdRenderer.RenderToTempFileUrl(MarkdownContent, Theme, GenerateToc);
         Browser.CoreWebView2.Navigate(fileUrl);
     }
 

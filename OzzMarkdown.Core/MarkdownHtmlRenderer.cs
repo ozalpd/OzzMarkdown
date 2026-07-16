@@ -13,6 +13,7 @@ namespace OzzMarkdown.Core
         {
             _pipeline = new MarkdownPipelineBuilder()
            .UseAdvancedExtensions()
+           .UseTableOfContent()
            .Build();
 
             VirtualHostName = virtualHostName;
@@ -50,8 +51,11 @@ namespace OzzMarkdown.Core
             }
         }
 
-        public string RenderToTempFileUrl(string markdown, MarkdownTheme theme)
+        public string RenderToTempFileUrl(string markdown, MarkdownTheme theme, bool generateToc)
         {
+            if (generateToc)
+                markdown = $"[TOC]\n\n{markdown}";
+
             string html = Markdown.ToHtml(markdown, _pipeline);
             string finalHtml = WrapHtml(html, theme);
 
