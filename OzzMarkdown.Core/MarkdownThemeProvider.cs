@@ -17,28 +17,33 @@ public static class MarkdownThemeProvider
         return _themes.TryGetValue(name, out var theme) ? theme : _themes["Light"];
     }
 
-    public static string GetPrismJs()
-    {
-        return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism.min.js");
-    }
+    /// <summary>
+    /// Resource name and on-disk file name of the Prism.js script asset (theme-independent).
+    /// </summary>
+    public static (string ResourceName, string FileName) GetPrismJsAsset()
+        => ("OzzMarkdown.Core.Assets.prism.min.js", "prism.min.js");
 
-    private static string GetPrismBaseCss()
-    {
-        return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism.min.css");
-    }
-
-    public static string GetPrismCss(this MarkdownTheme theme)
+    /// <summary>
+    /// Resource names and on-disk file names of the Prism CSS assets required by the given theme,
+    /// in the order they should be linked.
+    /// </summary>
+    public static IEnumerable<(string ResourceName, string FileName)> GetPrismCssAssets(MarkdownTheme theme)
     {
         switch (theme.Name)
         {
             case "Dark":
-                return ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-tomorrow-night.min.css");
+                yield return ("OzzMarkdown.Core.Assets.prism-tomorrow-night.min.css", "prism-tomorrow-night.min.css");
+                break;
 
             case "WarmLight":
-                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-ghcolors.min.css")}";
+                yield return ("OzzMarkdown.Core.Assets.prism.min.css", "prism.min.css");
+                yield return ("OzzMarkdown.Core.Assets.prism-ghcolors.min.css", "prism-ghcolors.min.css");
+                break;
 
             default: //for Light theme also
-                return $"{GetPrismBaseCss()}\n{ResourceLoader.Load("OzzMarkdown.Core.Assets.prism-vs.min.css")}";
+                yield return ("OzzMarkdown.Core.Assets.prism.min.css", "prism.min.css");
+                yield return ("OzzMarkdown.Core.Assets.prism-vs.min.css", "prism-vs.min.css");
+                break;
         }
     }
 

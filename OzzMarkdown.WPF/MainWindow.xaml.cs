@@ -37,6 +37,7 @@ public partial class MainWindow : Window
         _markdownViewer.SetBinding(
             MarkdownViewer.MarkdownContentProperty,
             new Binding(nameof(MainViewModel.MarkdownContent)) { Source = viewModel });
+        _markdownViewer.GenerateToc = true;
 
         _appSettings.MainWindowPosition.SetWindowPositions(this);
     }
