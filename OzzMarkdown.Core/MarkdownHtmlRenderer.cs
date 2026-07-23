@@ -102,11 +102,12 @@ namespace OzzMarkdown.Core
         /// </summary>
         private const string TocSidebarCss = @"
 :root {
-    --toc-width: 280px;
+    --toc-width: 180px;
+    --content-left: 190px;
 }
 
 body.has-toc-sidebar {
-    margin-left: var(--toc-width);
+    margin-left: var(--content-left);
 }
 
 .toc-sidebar {
@@ -118,7 +119,7 @@ body.has-toc-sidebar {
     overflow-y: auto;
     box-sizing: border-box;
     padding: 6px;
-    border-right: 1px solid rgba(128, 128, 128, 0.3);
+    border-right: 1px solid rgba(128, 128, 128, 0.6);
     background: inherit;
     z-index: 100;
 }
@@ -153,7 +154,7 @@ body.has-toc-sidebar {
     position: absolute;
     top: 0;
     right: -3px;
-    width: 6px;
+    width: 8px;
     height: 100%;
     cursor: col-resize;
     z-index: 101;
@@ -161,7 +162,7 @@ body.has-toc-sidebar {
 
 .toc-resize-handle:hover,
 .toc-resize-handle.resizing {
-    background: rgba(128, 128, 128, 0.4);
+    background: rgba(128, 128, 128, 0.6);
 }
 
 @media (max-width: 900px) {
@@ -175,7 +176,7 @@ body.has-toc-sidebar {
         height: auto;
         max-height: 40vh;
         border-right: none;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+        border-bottom: 1px solid rgba(128, 128, 128, 0.6);
         margin-bottom: 16px;
     }
 
@@ -193,10 +194,10 @@ body.has-toc-sidebar {
         /// </summary>
         private const string TocSidebarScript = @"
 (function initTocSidebar() {
-    var nav = document.querySelector('body > nav');
+    let nav = document.querySelector('body > nav');
     if (!nav) return;
 
-    var sidebar = document.createElement('div');
+    let sidebar = document.createElement('div');
     sidebar.className = 'toc-sidebar';
     nav.parentNode.insertBefore(sidebar, nav);
     sidebar.appendChild(nav);
@@ -207,19 +208,20 @@ body.has-toc-sidebar {
         }
     });
 
-    var handle = document.createElement('div');
+    let handle = document.createElement('div');
     handle.className = 'toc-resize-handle';
     sidebar.appendChild(handle);
 
     document.body.classList.add('has-toc-sidebar');
 
-    var minWidth = 180;
-    var maxWidth = 600;
-    var isResizing = false;
+    let minWidth = 120;
+    let maxWidth = 600;
+    let isResizing = false;
 
     function setWidth(px) {
-        var clamped = Math.min(maxWidth, Math.max(minWidth, px));
+        let clamped = Math.min(maxWidth, Math.max(minWidth, px));
         document.documentElement.style.setProperty('--toc-width', clamped + 'px');
+        document.documentElement.style.setProperty('--content-left', (clamped + 10) + 'px');
     }
 
     handle.addEventListener('mousedown', function (e) {
@@ -240,6 +242,8 @@ body.has-toc-sidebar {
         handle.classList.remove('resizing');
         document.body.style.userSelect = '';
     });
+
+    setWidth(300);
 })();";
 
         private string WrapHtml(string html, MarkdownTheme theme, bool generateToc)
