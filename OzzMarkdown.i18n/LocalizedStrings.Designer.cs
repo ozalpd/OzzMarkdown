@@ -61,6 +61,24 @@ namespace OzzMarkdown.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate TOC.
+        /// </summary>
+        public static string GenerateToc {
+            get {
+                return ResourceManager.GetString("GenerateToc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generates a Table of Contents automatically based on headings..
+        /// </summary>
+        public static string GenerateTocTooltip {
+            get {
+                return ResourceManager.GetString("GenerateTocTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Markdown File (*.md)|*.md.
         /// </summary>
         public static string MarkdownFileFilter {

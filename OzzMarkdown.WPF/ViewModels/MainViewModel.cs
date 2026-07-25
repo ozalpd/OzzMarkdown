@@ -35,6 +35,20 @@ public class MainViewModel : AbstractViewModel
     }
     private string? _currentFilePath;
 
+    public bool GenerateToc
+    {
+        get => _generateToc ?? true;
+        set
+        {
+            if (_generateToc != value)
+            {
+                _generateToc = value;
+                RaisePropertyChanged(nameof(GenerateToc));
+            }
+        }
+    }
+    private bool? _generateToc;
+
     public string? MarkdownContent
     {
         get => _markdownContent;

@@ -34,10 +34,10 @@ public partial class MainWindow : Window
         var viewModel = new MainViewModel();
         DataContext = viewModel;
 
-        _markdownViewer.SetBinding(
-            MarkdownViewer.MarkdownContentProperty,
-            new Binding(nameof(MainViewModel.MarkdownContent)) { Source = viewModel });
-        _markdownViewer.GenerateToc = true;
+        _markdownViewer.SetBinding(MarkdownViewer.MarkdownContentProperty,
+                        new Binding(nameof(MainViewModel.MarkdownContent)) { Source = viewModel });
+        _markdownViewer.SetBinding(MarkdownViewer.GenerateTocProperty,
+                        new Binding(nameof(MainViewModel.GenerateToc)) { Source = viewModel });
 
         _appSettings.MainWindowPosition.SetWindowPositions(this);
     }

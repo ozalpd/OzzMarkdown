@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GenerateToc" xml:space="preserve">
+    <value>Generate TOC</value>
+  </data>
+  <data name="GenerateTocTooltip" xml:space="preserve">
+    <value>Generates a Table of Contents automatically based on headings.</value>
+  </data>
   <data name="MarkdownFileFilter" xml:space="preserve">
     <value>Markdown File (*.md)|*.md</value>
   </data>

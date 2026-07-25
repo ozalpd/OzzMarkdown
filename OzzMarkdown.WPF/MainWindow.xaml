@@ -39,6 +39,36 @@
                     </Path>
                 </Viewbox>
             </Button>
+            <ToggleButton Style="{StaticResource ToggleButtonStyle-AutoX24}"
+                          ToolTip="{x:Static i18n:LocalizedStrings.GenerateTocTooltip}"
+                          IsChecked="{Binding GenerateToc}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.GenerateToc}"
+                               Margin="4,0,4,0"
+                               VerticalAlignment="Center"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Margin="0">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                    <Setter Property="Data" Value="{StaticResource toggle-off}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                            <Setter Property="Data" Value="{StaticResource toggle-on}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="False">
+                                            <Setter Property="Fill" Value="#808890"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                            <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Viewbox>
+                </StackPanel>
+            </ToggleButton>
         </ToolBar>
 
         <ContentControl x:Name="MarkdownViewerHost" Grid.Row="1"/>

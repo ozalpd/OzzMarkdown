@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2026-07-25
 
+### Added
+-Added a localized "Generate TOC" toggle button to the toolbar with icon and tooltip, bound to a new `GenerateToc` property in MainViewModel (default true).
+
+### Changed
+- Moved `Styles.xaml`and `BootstrapIcons.xaml` to `OzzWpf.Core` for reuse across WPF-based frontends/tools.
+- Updated `MainViewModel` to include `GenerateToc` property and bind it to the toolbar toggle button.
 
 ## [0.0.2] - 2026-07-15
 
