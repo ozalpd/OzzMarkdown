@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/BootstrapIcons.xaml" />
-                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OzzWpf.Core;component/Resources/BootstrapIcons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OzzWpf.Core;component/Resources/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

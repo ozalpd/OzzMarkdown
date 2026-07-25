@@ -6,7 +6,7 @@
         xmlns:i18n="clr-namespace:OzzMarkdown.i18n;assembly=OzzMarkdown.i18n"
         xmlns:local="clr-namespace:OzzMarkdown.WPF"
         mc:Ignorable="d"
-        Title="Ozz Markdown" Height="960" Width="1280">
+        Title="Ozz Markdown" Height="832" Width="1280">
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <!-- Toolbar -->
