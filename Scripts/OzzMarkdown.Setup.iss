@@ -36,3 +36,42 @@ Name: "{group}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
 Name: "{commondesktop}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
 [Run]
 Filename: "{app}\OzzMarkdown.WPF.exe"; Description: "Launch OzzMarkdown"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function IsDotNetDesktopRuntimeInstalled(): Boolean;
+var
+  DotNetSharedPath: String;
+  FindRec: TFindRec;
+begin
+  Result := False;
+  DotNetSharedPath := ExpandConstant('{pf}\dotnet\shared\Microsoft.WindowsDesktop.App');
+  if DirExists(DotNetSharedPath) then
+  begin
+    if FindFirst(DotNetSharedPath + '\10.*', FindRec) then
+    begin
+      try
+        Result := True;
+      finally
+        FindClose(FindRec);
+      end;
+    end;
+  end;
+end;
+
+function InitializeSetup(): Boolean;
+var
+  ErrorCode: Integer;
+begin
+  Result := True;
+  if not IsDotNetDesktopRuntimeInstalled() then
+  begin
+    if MsgBox('OzzMarkdown requires the .NET 10 Desktop Runtime, which was not detected on this computer.' + #13#10 + #13#10 +
+      'Click OK to open the download page in your browser. After installing the runtime, re-run this installer.' + #13#10 + #13#10 +
+      'Click Cancel to continue installing anyway (the application will not run without the runtime).',
+      mbConfirmation, MB_OKCANCEL) = IDOK then
+    begin
+      ShellExec('open', 'https://dotnet.microsoft.com/download/dotnet/10.0/runtime', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+      Result := False;
+    end;
+  end;
+end;

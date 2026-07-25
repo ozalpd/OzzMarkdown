@@ -6,12 +6,18 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-		<Version>0.1.4</Version>
+
 		<ApplicationIcon>Assets\icon-M-02.ico</ApplicationIcon>
+		<Company>Özalp Döndüren</Company>
+		<Product>Ozz Markdown</Product>
+		<Description>Ozz Markdown is a lightweight Markdown viewer and editor.</Description>
+		<Copyright>Copyright © 2026</Copyright>
+		
+		<Version>0.1.6</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="Assets\icon-M-02.ico" />
+		<Resource Include="Assets\icon-M-02.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

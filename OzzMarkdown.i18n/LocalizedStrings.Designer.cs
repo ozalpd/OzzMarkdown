@@ -61,6 +61,33 @@ namespace OzzMarkdown.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string ButtonCancel {
+            get {
+                return ResourceManager.GetString("ButtonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string ButtonOK {
+            get {
+                return ResourceManager.GetString("ButtonOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate TOC.
         /// </summary>
         public static string GenerateToc {
@@ -93,6 +120,24 @@ namespace OzzMarkdown.i18n {
         public static string OpenFile {
             get {
                 return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version:.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View on GitHub.
+        /// </summary>
+        public static string ViewOnGitHub {
+            get {
+                return ResourceManager.GetString("ViewOnGitHub", resourceCulture);
             }
         }
     }

@@ -16,6 +16,9 @@ move /Y OzzMarkdown.Setup.tmp ..\..\Installers\OzzMarkdown.Setup.iss
 set SOURCE=..\OzzMarkdown.WPF\bin\Release\net10.0-windows
 set TARGET=..\..\Installers\OzzMarkdown\
 
+del "%TARGET%\*" /S /Q /F
+pause
+
 echo Preparing installer files...
 xcopy "%SOURCE%\*.dll" "%TARGET%" /Y
 xcopy "%SOURCE%\*.exe" "%TARGET%" /Y
@@ -32,4 +35,4 @@ echo Portable ZIP created.
 
 echo Done.
 
-@pause
+pause

@@ -6,7 +6,8 @@
         xmlns:i18n="clr-namespace:OzzMarkdown.i18n;assembly=OzzMarkdown.i18n"
         xmlns:local="clr-namespace:OzzMarkdown.WPF"
         mc:Ignorable="d"
-        Title="Ozz Markdown" Height="832" Width="1280">
+        Height="832" Width="1280" MinHeight="480" MinWidth="480"
+        Title="Ozz Markdown">
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <!-- Toolbar -->
@@ -69,6 +70,31 @@
                     </Viewbox>
                 </StackPanel>
             </ToggleButton>
+            <Separator/>
+            <Border Width="32" Background="Transparent" />
+            <Border Width="32" Background="Transparent" />
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.About}"
+                    Command="{Binding ShowAboutCommand}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource info-circle-fill}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
         </ToolBar>
 
         <ContentControl x:Name="MarkdownViewerHost" Grid.Row="1"/>

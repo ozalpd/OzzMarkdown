@@ -30,6 +30,7 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 | `AbstractViewModel` (`OzzWpf.Core.ViewModels`) | Shared base ViewModel implementing `INotifyPropertyChanged`, with a `RaisePropertyChanged(string)` helper. Shared across WPF-based frontends. |
 | `RelayCommand` (`OzzWpf.Core.Commands`) | Shared `ICommand` implementation supporting sync and async delegates with an optional `CanExecute` predicate. |
 | `AppVersion` (`OzzWpf.Core.Models`) | Static helper exposing version/product metadata (`Version`, `FullVersion`, `Product`, `Copyright`, `Description`) read from assembly attributes. |
+| `AboutDialog` (`OzzWpf.Core.Dialogs`) | Shared modal `Window` showing product name, version, description, copyright, and a GitHub link, bound to `AppVersion`. Exposes `LoadHighResolutionIcon(string iconPath)` which must be called (with a pack URI) *before* `ShowDialog()` to render a high-res app icon. `WindowStartupLocation="CenterOwner"`; closes automatically on deactivation. |
 
 ## Key Constraints
 
@@ -56,6 +57,8 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 - App version/product metadata is read via `OzzWpf.Core.Models.AppVersion` (not project-local).
 - Shared WPF resources (`Styles.xaml`, `BootstrapIcons.xaml`) live in `OzzWpf.Core\Resources` (not in `OzzMarkdown.WPF`), since they're also intended for reuse by new controls added to `OzzWpf.Core`. `OzzMarkdown.WPF\App.xaml` merges them via pack URIs, e.g. `pack://application:,,,/OzzWpf.Core;component/Resources/Styles.xaml`.
 - Controls that require constructor arguments (like `MarkdownViewer`) cannot be declared directly in XAML with a parameterless tag; instantiate them in code-behind and use `FrameworkElement.SetBinding` to bind their `DependencyProperty` values to the `DataContext` ViewModel.
+- `RelayCommand` only supports parameterless `Action` delegates (no `CommandParameter` support). For actions that need setup before showing a dialog (e.g. `ShowAboutDialog` loading `AboutDialog`'s icon via `LoadHighResolutionIcon` before `ShowDialog()`), define a private helper method in the ViewModel and wrap it in a `RelayCommand`, using `Application.Current.MainWindow` as the dialog owner rather than relying on a bound `CommandParameter`.
+- Images/icons referenced via pack URI (`pack://application:,,,/<Assembly>;component/<path>`) must use the `Resource` MSBuild item type, not `Content` — `Content` items are only copied to the output directory when `CopyToOutputDirectory` is explicitly set, and pack URI resolution for embedded resources requires `Resource`.
 
 ## MAUI Frontend Notes (Planned)
 

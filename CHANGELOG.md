@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2026-07-26
+
+### Added
+- Wired the About toolbar button to a `ShowAboutCommand` `RelayCommand` in `MainViewModel`, which loads the app's high-resolution icon via `AboutDialog.LoadHighResolutionIcon` before showing the dialog.
+- Added a runtime-check `[Code]` section to `OzzMarkdown.Setup.iss` that detects a missing .NET 10 Desktop Runtime and offers to open the official download page before continuing.
+- Added `AppId`, `UninstallDisplayIcon`, `WizardStyle=modern`, `ArchitecturesAllowed`/`ArchitecturesInstallIn64BitMode`, and `Flags: ignoreversion` to the Inno Setup installer script for correct upgrade/uninstall behavior and 64-bit installs.
+
+### Fixed
+- Fixed `AboutDialog` throwing `DirectoryNotFoundException` when loading the app icon: changed `Assets\icon-M-02.ico` from a `Content` item (never copied to output) to a `Resource` item in `OzzMarkdown.WPF.csproj` so it resolves reliably via its pack URI.
+- Fixed the "Generate TOC" `ToggleButton` showing a different background when checked vs. unchecked; `ToggleButtonStyle-AutoX24` now uses a custom `ControlTemplate` with a fixed transparent `Background`/`BorderBrush`, ignoring the default theme's checked-state chrome.
+
+### Changed
+- Removed the standalone `ShowAboutCommand` class (`OzzWpf.Core.Commands`) in favor of a `RelayCommand` defined directly in `MainViewModel`, since showing the dialog requires loading the icon first.
+
+## [0.1.5] - 2026-07-25
+
+### Added
+- Added `AboutDialog` window to display application information, including version, author, and license details.
+
+
 ## [0.1.4] - 2026-07-25
 
 ### Added

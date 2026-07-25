@@ -1,7 +1,9 @@
 using OzzMarkdown.WPF.Services;
 using OzzWpf.Core.Commands;
+using OzzWpf.Core.Dialogs;
 using OzzWpf.Core.ViewModels;
 using System.IO;
+using System.Windows;
 
 namespace OzzMarkdown.WPF.ViewModels;
 
@@ -15,9 +17,12 @@ public class MainViewModel : AbstractViewModel
     {
         _fileDialogService = fileDialogService ?? throw new ArgumentNullException(nameof(fileDialogService));
         OpenFileCommand = new RelayCommand(async () => await OpenMarkdownFileAsync());
+        ShowAboutCommand = new RelayCommand(ShowAboutDialog);
     }
 
     public RelayCommand OpenFileCommand { get; }
+
+    public RelayCommand ShowAboutCommand { get; }
 
 
 
@@ -81,5 +86,16 @@ public class MainViewModel : AbstractViewModel
         {
             // Handle exceptions (e.g., log them or show a message to the user)
         }
+    }
+
+    private static void ShowAboutDialog()
+    {
+        var aboutDialog = new AboutDialog();
+        if (Application.Current?.MainWindow != null)
+        {
+            aboutDialog.Owner = Application.Current.MainWindow;
+        }
+        aboutDialog.LoadHighResolutionIcon("pack://application:,,,/OzzMarkdown.WPF;component/Assets/icon-M-02.ico");
+        aboutDialog.ShowDialog();
     }
 }

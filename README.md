@@ -47,6 +47,8 @@ OzzMarkdown/
 │   │   └── RelayCommand.cs
 │   ├── Controls/
 │   │   └── MarkdownViewer.xaml(.cs)  # WebView2-based Markdown viewer control
+│   ├── Dialogs/
+│   │   └── AboutDialog.xaml(.cs)     # Shared About window (product/version/copyright info)
 │   ├── Models/
 │   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
 │   │   ├── AppVersion.cs             # Assembly version/metadata accessor
