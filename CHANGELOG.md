@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-07-25
+
+### Added
+- Added installer script for Inno Setup to create a Windows installer for the WPF frontend.
+
+### Changed
+- User control `MarkdownViewer` now uses a custom user data folder for WebView2 to improve isolation and persistence.
+- Bumped `OzzMarkdown.WPF` version to 0.1.4 and `OzzWpf.Core` to 0.1.4 for consistency.
+
 ## [0.1.0] - 2026-07-25
 
 ### Added

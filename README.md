@@ -28,7 +28,7 @@ OzzMarkdown is a multi-frontend desktop utility targeting **.NET 10**.
 
 The core functionality lives in `OzzMarkdown.Core`, which is **platform-agnostic** and shared by two frontends and [OzzContextGen](https://github.com/ozalpd/OzzContextGen). `OzzMarkdown.i18n` provides shared localization (English and Turkish) across all projects.
 
-The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictionary and [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as WPF `Geometry` resources in `BootstrapIcons.xaml`. The MAUI frontend will mirror the same MVVM structure.
+The WPF frontend uses MVVM. Shared WPF resources — a `Styles.xaml` resource dictionary and [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as WPF `Geometry` resources in `BootstrapIcons.xaml` — live in `OzzWpf.Core\Resources` so they can be reused by future WPF-based frontends/tools (e.g. `MarkdownViewer` and other shared controls). The MAUI frontend will mirror the same MVVM structure.
 
 ## Project Structure
 
@@ -51,6 +51,9 @@ OzzMarkdown/
 │   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
 │   │   ├── AppVersion.cs             # Assembly version/metadata accessor
 │   │   └── WindowPosition.cs         # Window geometry capture/restore helper
+│   ├── Resources/
+│   │   ├── Styles.xaml           # Shared control styles
+│   │   └── BootstrapIcons.xaml   # Bootstrap Icons v1.13.1 as Geometry resources
 │   └── ViewModels/
 │       └── AbstractViewModel.cs
 │
@@ -62,14 +65,13 @@ OzzMarkdown/
 │   │   └── Win32FileDialogService.cs # Win32-backed implementation
 │   ├── ViewModels/
 │   │   └── MainViewModel.cs
-│   ├── Resources/
-│   │   ├── Styles.xaml           # Shared control styles
-│   │   └── BootstrapIcons.xaml   # Bootstrap Icons v1.13.1 as Geometry resources
 │   └── MainWindow.xaml(.cs)
 │
 ├── OzzMarkdown.i18n/           # Shared localization (English + Turkish .resx)
 │
-└── OzzMarkdown.MAUI/           # 🔜 Planned .NET MAUI frontend
+├── OzzMarkdown.MAUI/           # 🔜 Planned .NET MAUI frontend
+│
+└── Scripts/                    # Release packaging: PrepareInstallerFiles.bat and Inno Setup script (OzzMarkdown.Setup.iss)
 ```
 
 ## Getting Started

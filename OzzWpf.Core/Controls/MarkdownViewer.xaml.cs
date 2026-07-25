@@ -82,7 +82,15 @@ public partial class MarkdownViewer : System.Windows.Controls.UserControl
 
     private async void MarkdownViewer_Loaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        await Browser.EnsureCoreWebView2Async();
+        string userDataFolder = System.IO.Path.Combine(
+            System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),
+            settingsFolderName,
+            "WebView2");
+
+        var environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(
+            userDataFolder: userDataFolder);
+
+        await Browser.EnsureCoreWebView2Async(environment);
         Browser.CoreWebView2.SetVirtualHostNameToFolderMapping(
             virtualHostName,
             mdRenderer.TempFolder,

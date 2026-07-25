@@ -11,7 +11,7 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 | Project | Role |
 |---|---|
 | `OzzMarkdown.Core` | Platform-agnostic Markdown rendering engine. No UI or platform dependencies. Shared by all frontends and by [OzzContextGen](https://github.com/ozalpd/OzzContextGen). |
-| `OzzWpf.Core` | Shared WPF building blocks: the `MarkdownViewer` user control, `AbstractAppSettings`, and `WindowPosition`. Depends on `OzzMarkdown.Core` and `Microsoft.Web.WebView2`. |
+| `OzzWpf.Core` | Shared WPF building blocks: the `MarkdownViewer` user control, `AbstractAppSettings`, `WindowPosition`, and shared `Resources/Styles.xaml` + `Resources/BootstrapIcons.xaml` (Bootstrap Icons v1.13.1, MIT). Depends on `OzzMarkdown.Core` and `Microsoft.Web.WebView2`. |
 | `OzzMarkdown.WPF` | WPF desktop frontend using MVVM. References `OzzWpf.Core`, `OzzMarkdown.Core`, and `OzzMarkdown.i18n`. |
 | `OzzMarkdown.MAUI` | *(Planned)* .NET MAUI cross-platform frontend. Will mirror the WPF frontend's MVVM structure. |
 | `OzzMarkdown.i18n` | Shared localization (English + Turkish `.resx` files) used across all frontends. |
@@ -24,7 +24,7 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 | `MarkdownTheme` (`OzzMarkdown.Core`) | Record describing a named CSS theme (e.g., name + stylesheet body) applied when rendering Markdown to HTML. |
 | `MarkdownThemeProvider` (`OzzMarkdown.Core`) | Static registry of built-in themes (`Light`, etc.). `GetTheme(name)` falls back to `Light` if the name is not found. `GetAllThemeNames()` supports UI population (e.g., a theme picker ComboBox). |
 | `ResourceLoader` (`OzzMarkdown.Core.Helpers`) | Loads embedded resources (e.g., Prism.js minified JS/CSS assets under `Assets/`) as strings via `Load(name)`. |
-| `MarkdownViewer` (`OzzWpf.Core.Controls`) | WPF `UserControl` wrapping a `WebView2` browser. Exposes `MarkdownContent` as a `DependencyProperty` (bindable) that re-renders via `MarkdownHtmlRenderer` whenever it changes. Constructor requires an `AbstractAppSettings` instance to resolve the settings folder name and initial theme. |
+| `MarkdownViewer` (`OzzWpf.Core.Controls`) | WPF `UserControl` wrapping a `WebView2` browser. Exposes `MarkdownContent` as a `DependencyProperty` (bindable) that re-renders via `MarkdownHtmlRenderer` whenever it changes. Constructor requires an `AbstractAppSettings` instance to resolve the settings folder name and initial theme. Initializes WebView2 with an explicit `CoreWebView2Environment` whose `UserDataFolder` is under `%LocalAppData%\<settingsFolderName>\WebView2` — required because the default (exe-adjacent) user-data folder is not writable when installed under `Program Files`. |
 | `AbstractAppSettings` (`OzzWpf.Core.Models`) | Abstract base for app settings: `MainWindowPosition`, `UiCulture`, `SelectedTheme`, and JSON persistence helpers (`Save`, `GetSettingsFilePath`). Subclasses provide `GetSettingsFolderName()` and app-specific settings file naming/singleton logic (see `OzzMarkdown.WPF.Models.AppSettings`). |
 | `WindowPosition` (`OzzWpf.Core.Models`) | Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it. |
 | `AbstractViewModel` (`OzzWpf.Core.ViewModels`) | Shared base ViewModel implementing `INotifyPropertyChanged`, with a `RaisePropertyChanged(string)` helper. Shared across WPF-based frontends. |
@@ -54,7 +54,7 @@ OzzMarkdown is a lightweight, modern Markdown reader (with editing features plan
 - `MainViewModel` takes an `IFileDialogService` via constructor injection (with a parameterless overload defaulting to `Win32FileDialogService` for XAML/DataContext convenience).
 - `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init) extending `AbstractAppSettings`; persists settings as JSON to `%AppData%/OzzMarkdown/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
 - App version/product metadata is read via `OzzWpf.Core.Models.AppVersion` (not project-local).
-- Shared WPF resources for the frontend live in `Resources/Styles.xaml` and `Resources/BootstrapIcons.xaml` (Bootstrap Icons v1.13.1, MIT, as `Geometry` resources for use in `Path` elements).
+- Shared WPF resources (`Styles.xaml`, `BootstrapIcons.xaml`) live in `OzzWpf.Core\Resources` (not in `OzzMarkdown.WPF`), since they're also intended for reuse by new controls added to `OzzWpf.Core`. `OzzMarkdown.WPF\App.xaml` merges them via pack URIs, e.g. `pack://application:,,,/OzzWpf.Core;component/Resources/Styles.xaml`.
 - Controls that require constructor arguments (like `MarkdownViewer`) cannot be declared directly in XAML with a parameterless tag; instantiate them in code-behind and use `FrameworkElement.SetBinding` to bind their `DependencyProperty` values to the `DataContext` ViewModel.
 
 ## MAUI Frontend Notes (Planned)
