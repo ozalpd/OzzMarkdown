@@ -73,5 +73,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
 [0.1.6]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.6
-[0.1.5]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.5
+[0.1.4]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.4
 ...
