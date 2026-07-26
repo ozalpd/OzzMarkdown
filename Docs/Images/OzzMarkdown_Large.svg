@@ -31,16 +31,16 @@
     <polygon points="448,720 576,720 512,816" />
   </g>
 
-  <!-- Left Bracket
+  <!-- Left Bracket -->
   <path d="M 128 928 L 128 96" class="line-stroke" stroke-width="96"/>
   <path d="M 176 880 L 320 880" class="line-stroke" stroke-width="96"/>
   <path d="M 176 144 L 320 144" class="line-stroke" stroke-width="96"/>
-   -->
-  <!-- Right Bracket
+  
+  <!-- Right Bracket -->
   <path d="M 896 928 L 896 96" class="line-stroke" stroke-width="96"/>
   <path d="M 848 880 L 704 880" class="line-stroke" stroke-width="96"/>
   <path d="M 848 144 L 704 144" class="line-stroke" stroke-width="96"/>
-   -->
+  
   <!-- Chevron M -->
   <path d="M 256 724 L 400 300" class="chev-stroke" stroke-width="96" stroke-linecap="round"/>
   <path d="M 512 724 L 400 300" class="chev-stroke" stroke-width="96" stroke-linecap="round"/>
