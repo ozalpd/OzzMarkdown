@@ -73,7 +73,7 @@ OzzMarkdown/
 │
 ├── OzzMarkdown.MAUI/           # 🔜 Planned .NET MAUI frontend
 │
-└── Scripts/                    # Release packaging: PrepareInstallerFiles.bat and Inno Setup script (OzzMarkdown.Setup.iss)
+└── Scripts/                    # Release packaging: PrepareInstallerFiles.bat, Inno Setup script (OzzMarkdown.Setup.iss), and TagRelease.bat for tagging releases in git
 ```
 
 ## Getting Started

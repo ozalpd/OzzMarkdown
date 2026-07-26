@@ -7,6 +7,7 @@
   <Folder Name="/Installer Scripts/">
     <File Path="Scripts/OzzMarkdown.Setup.iss" />
     <File Path="Scripts/PrepareInstallerFiles.bat" />
+    <File Path="Scripts/TagRelease.bat" />
   </Folder>
   <Project Path="OzzMarkdown.Core/OzzMarkdown.Core.csproj" />
   <Project Path="OzzMarkdown.i18n/OzzMarkdown.i18n.csproj" Id="f0741cea-0728-4f5f-a16e-d01abefe2559" />

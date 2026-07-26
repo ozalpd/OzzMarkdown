@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Wired the About toolbar button to a `ShowAboutCommand` `RelayCommand` in `MainViewModel`, which loads the app's high-resolution icon via `AboutDialog.LoadHighResolutionIcon` before showing the dialog.
 - Added a runtime-check `[Code]` section to `OzzMarkdown.Setup.iss` that detects a missing .NET 10 Desktop Runtime and offers to open the official download page before continuing.
 - Added `AppId`, `UninstallDisplayIcon`, `WizardStyle=modern`, `ArchitecturesAllowed`/`ArchitecturesInstallIn64BitMode`, and `Flags: ignoreversion` to the Inno Setup installer script for correct upgrade/uninstall behavior and 64-bit installs.
+- Added `Scripts\TagRelease.bat` to create and push a git tag derived from `OzzMarkdown.WPF.csproj`'s `<Version>`, with duplicate-tag detection and a confirmation prompt before tagging/pushing.
 
 ### Fixed
 - Fixed `AboutDialog` throwing `DirectoryNotFoundException` when loading the app icon: changed `Assets\icon-M-02.ico` from a `Content` item (never copied to output) to a `Resource` item in `OzzMarkdown.WPF.csproj` so it resolves reliably via its pack URI.
