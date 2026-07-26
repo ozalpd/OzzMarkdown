@@ -5,13 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Added `Scripts\TagRelease.bat` to create and push a git tag derived from `OzzMarkdown.WPF.csproj`'s `<Version>`, with duplicate-tag detection and a confirmation prompt before tagging/pushing.
+
 ## [0.1.6] - 2026-07-26
 
 ### Added
 - Wired the About toolbar button to a `ShowAboutCommand` `RelayCommand` in `MainViewModel`, which loads the app's high-resolution icon via `AboutDialog.LoadHighResolutionIcon` before showing the dialog.
 - Added a runtime-check `[Code]` section to `OzzMarkdown.Setup.iss` that detects a missing .NET 10 Desktop Runtime and offers to open the official download page before continuing.
 - Added `AppId`, `UninstallDisplayIcon`, `WizardStyle=modern`, `ArchitecturesAllowed`/`ArchitecturesInstallIn64BitMode`, and `Flags: ignoreversion` to the Inno Setup installer script for correct upgrade/uninstall behavior and 64-bit installs.
-- Added `Scripts\TagRelease.bat` to create and push a git tag derived from `OzzMarkdown.WPF.csproj`'s `<Version>`, with duplicate-tag detection and a confirmation prompt before tagging/pushing.
 
 ### Fixed
 - Fixed `AboutDialog` throwing `DirectoryNotFoundException` when loading the app icon: changed `Assets\icon-M-02.ico` from a `Content` item (never copied to output) to a `Resource` item in `OzzMarkdown.WPF.csproj` so it resolves reliably via its pack URI.
@@ -25,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added `AboutDialog` window to display application information, including version, author, and license details.
 
-
 ## [0.1.4] - 2026-07-25
 
 ### Added
@@ -38,10 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2026-07-25
 
 ### Added
--Added a localized "Generate TOC" toggle button to the toolbar with icon and tooltip, bound to a new `GenerateToc` property in MainViewModel (default true).
+- Added a localized "Generate TOC" toggle button to the toolbar with icon and tooltip, bound to a new `GenerateToc` property in MainViewModel (default true).
 
 ### Changed
-- Moved `Styles.xaml`and `BootstrapIcons.xaml` to `OzzWpf.Core` for reuse across WPF-based frontends/tools.
+- Moved `Styles.xaml` and `BootstrapIcons.xaml` to `OzzWpf.Core` for reuse across WPF-based frontends/tools.
 - Updated `MainViewModel` to include `GenerateToc` property and bind it to the toolbar toggle button.
 
 ## [0.0.2] - 2026-07-15
@@ -65,3 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Localization support (English and Turkish) via `OzzMarkdown.i18n`.
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
+[0.1.6]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.6
+[0.1.5]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.5
+...
