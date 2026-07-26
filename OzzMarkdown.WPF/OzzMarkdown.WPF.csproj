@@ -7,7 +7,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 
-		<ApplicationIcon>Assets\icon-M-02.ico</ApplicationIcon>
+		<ApplicationIcon>Assets\icon-M-03.ico</ApplicationIcon>
 		<Company>Özalp Döndüren</Company>
 		<Product>Ozz Markdown</Product>
 		<Description>Ozz Markdown is a lightweight Markdown viewer and editor.</Description>
@@ -17,7 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Resource Include="Assets\icon-M-02.ico" />
+		<Resource Include="Assets\icon-M-03.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -95,7 +95,7 @@ public class MainViewModel : AbstractViewModel
         {
             aboutDialog.Owner = Application.Current.MainWindow;
         }
-        aboutDialog.LoadHighResolutionIcon("pack://application:,,,/OzzMarkdown.WPF;component/Assets/icon-M-02.ico");
+        aboutDialog.LoadHighResolutionIcon("pack://application:,,,/OzzMarkdown.WPF;component/Assets/icon-M-03.ico");
         aboutDialog.ShowDialog();
     }
 }
