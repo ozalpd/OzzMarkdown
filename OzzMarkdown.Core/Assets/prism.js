@@ -1,5 +1,5 @@
 /* PrismJS 1.30.0
-https://prismjs.com/download#themes=prism&languages=markup+css+clike+javascript+aspnet+bash+csharp+json+json5+powershell+cshtml+sql+t4-templating+t4-cs+typescript+xml-doc&plugins=line-numbers+show-language+toolbar+copy-to-clipboard */
+https://prismjs.com/download#themes=prism&languages=markup+css+clike+javascript+aspnet+bash+batch+csharp+json+json5+pascal+powershell+cshtml+sql+t4-templating+t4-cs+typescript+xml-doc&plugins=line-numbers+show-language+toolbar+copy-to-clipboard */
 /// <reference lib="WebWorker"/>
 
 var _self = (typeof window !== 'undefined')
@@ -2373,6 +2373,106 @@ Prism.languages.insertBefore('aspnet', Prism.languages.javascript ? 'script' : '
 	Prism.languages.shell = Prism.languages.bash;
 }(Prism));
 
+(function (Prism) {
+	var variable = /%%?[~:\w]+%?|!\S+!/;
+	var parameter = {
+		pattern: /\/[a-z?]+(?=[ :]|$):?|-[a-z]\b|--[a-z-]+\b/im,
+		alias: 'attr-name',
+		inside: {
+			'punctuation': /:/
+		}
+	};
+	var string = /"(?:[\\"]"|[^"])*"(?!")/;
+	var number = /(?:\b|-)\d+\b/;
+
+	Prism.languages.batch = {
+		'comment': [
+			/^::.*/m,
+			{
+				pattern: /((?:^|[&(])[ \t]*)rem\b(?:[^^&)\r\n]|\^(?:\r\n|[\s\S]))*/im,
+				lookbehind: true
+			}
+		],
+		'label': {
+			pattern: /^:.*/m,
+			alias: 'property'
+		},
+		'command': [
+			{
+				// FOR command
+				pattern: /((?:^|[&(])[ \t]*)for(?: \/[a-z?](?:[ :](?:"[^"]*"|[^\s"/]\S*))?)* \S+ in \([^)]+\) do/im,
+				lookbehind: true,
+				inside: {
+					'keyword': /\b(?:do|in)\b|^for\b/i,
+					'string': string,
+					'parameter': parameter,
+					'variable': variable,
+					'number': number,
+					'punctuation': /[()',]/
+				}
+			},
+			{
+				// IF command
+				pattern: /((?:^|[&(])[ \t]*)if(?: \/[a-z?](?:[ :](?:"[^"]*"|[^\s"/]\S*))?)* (?:not )?(?:cmdextversion \d+|defined \w+|errorlevel \d+|exist \S+|(?:"[^"]*"|(?!")(?:(?!==)\S)+)?(?:==| (?:equ|geq|gtr|leq|lss|neq) )(?:"[^"]*"|[^\s"]\S*))/im,
+				lookbehind: true,
+				inside: {
+					'keyword': /\b(?:cmdextversion|defined|errorlevel|exist|not)\b|^if\b/i,
+					'string': string,
+					'parameter': parameter,
+					'variable': variable,
+					'number': number,
+					'operator': /\^|==|\b(?:equ|geq|gtr|leq|lss|neq)\b/i
+				}
+			},
+			{
+				// ELSE command
+				pattern: /((?:^|[&()])[ \t]*)else\b/im,
+				lookbehind: true,
+				inside: {
+					'keyword': /^else\b/i
+				}
+			},
+			{
+				// SET command
+				pattern: /((?:^|[&(])[ \t]*)set(?: \/[a-z](?:[ :](?:"[^"]*"|[^\s"/]\S*))?)* (?:[^^&)\r\n]|\^(?:\r\n|[\s\S]))*/im,
+				lookbehind: true,
+				inside: {
+					'keyword': /^set\b/i,
+					'string': string,
+					'parameter': parameter,
+					'variable': [
+						variable,
+						/\w+(?=(?:[*\/%+\-&^|]|<<|>>)?=)/
+					],
+					'number': number,
+					'operator': /[*\/%+\-&^|]=?|<<=?|>>=?|[!~_=]/,
+					'punctuation': /[()',]/
+				}
+			},
+			{
+				// Other commands
+				pattern: /((?:^|[&(])[ \t]*@?)\w+\b(?:"(?:[\\"]"|[^"])*"(?!")|[^"^&)\r\n]|\^(?:\r\n|[\s\S]))*/m,
+				lookbehind: true,
+				inside: {
+					'keyword': /^\w+\b/,
+					'string': string,
+					'parameter': parameter,
+					'label': {
+						pattern: /(^\s*):\S+/m,
+						lookbehind: true,
+						alias: 'property'
+					},
+					'variable': variable,
+					'number': number,
+					'operator': /\^/
+				}
+			}
+		],
+		'operator': /[&@]/,
+		'punctuation': /[()']/
+	};
+}(Prism));
+
 // https://www.json.org/json-en.html
 Prism.languages.json = {
 	'property': {
@@ -2424,6 +2524,78 @@ Prism.languages.webmanifest = Prism.languages.json;
 	});
 
 }(Prism));
+
+// Based on Free Pascal
+
+/* TODO
+	Support inline asm ?
+*/
+
+Prism.languages.pascal = {
+	'directive': {
+		pattern: /\{\$[\s\S]*?\}/,
+		greedy: true,
+		alias: ['marco', 'property']
+	},
+	'comment': {
+		pattern: /\(\*[\s\S]*?\*\)|\{[\s\S]*?\}|\/\/.*/,
+		greedy: true
+	},
+	'string': {
+		pattern: /(?:'(?:''|[^'\r\n])*'(?!')|#[&$%]?[a-f\d]+)+|\^[a-z]/i,
+		greedy: true
+	},
+	'asm': {
+		pattern: /(\basm\b)[\s\S]+?(?=\bend\s*[;[])/i,
+		lookbehind: true,
+		greedy: true,
+		inside: null // see below
+	},
+	'keyword': [
+		{
+			// Turbo Pascal
+			pattern: /(^|[^&])\b(?:absolute|array|asm|begin|case|const|constructor|destructor|do|downto|else|end|file|for|function|goto|if|implementation|inherited|inline|interface|label|nil|object|of|operator|packed|procedure|program|record|reintroduce|repeat|self|set|string|then|to|type|unit|until|uses|var|while|with)\b/i,
+			lookbehind: true
+		},
+		{
+			// Free Pascal
+			pattern: /(^|[^&])\b(?:dispose|exit|false|new|true)\b/i,
+			lookbehind: true
+		},
+		{
+			// Object Pascal
+			pattern: /(^|[^&])\b(?:class|dispinterface|except|exports|finalization|finally|initialization|inline|library|on|out|packed|property|raise|resourcestring|threadvar|try)\b/i,
+			lookbehind: true
+		},
+		{
+			// Modifiers
+			pattern: /(^|[^&])\b(?:absolute|abstract|alias|assembler|bitpacked|break|cdecl|continue|cppdecl|cvar|default|deprecated|dynamic|enumerator|experimental|export|external|far|far16|forward|generic|helper|implements|index|interrupt|iochecks|local|message|name|near|nodefault|noreturn|nostackframe|oldfpccall|otherwise|overload|override|pascal|platform|private|protected|public|published|read|register|reintroduce|result|safecall|saveregisters|softfloat|specialize|static|stdcall|stored|strict|unaligned|unimplemented|varargs|virtual|write)\b/i,
+			lookbehind: true
+		}
+	],
+	'number': [
+		// Hexadecimal, octal and binary
+		/(?:[&%]\d+|\$[a-f\d]+)/i,
+		// Decimal
+		/\b\d+(?:\.\d+)?(?:e[+-]?\d+)?/i
+	],
+	'operator': [
+		/\.\.|\*\*|:=|<[<=>]?|>[>=]?|[+\-*\/]=?|[@^=]/,
+		{
+			pattern: /(^|[^&])\b(?:and|as|div|exclude|in|include|is|mod|not|or|shl|shr|xor)\b/,
+			lookbehind: true
+		}
+	],
+	'punctuation': /\(\.|\.\)|[()\[\]:;,.]/
+};
+
+Prism.languages.pascal.asm.inside = Prism.languages.extend('pascal', {
+	'asm': undefined,
+	'keyword': undefined,
+	'operator': undefined
+});
+
+Prism.languages.objectpascal = Prism.languages.pascal;
 
 (function (Prism) {
 

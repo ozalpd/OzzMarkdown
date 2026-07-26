@@ -64,7 +64,7 @@ h1, h2, h3, h4 {
 }
 
 a {
-    color: #0067c0;
+    color: #0032b8;
     text-decoration: none;
 }
 
@@ -114,7 +114,7 @@ h1, h2, h3, h4 {
 }
 
 a {
-	color: #4ea1ff;
+	color: #a2d8ff;
 	text-decoration: none;
 }
 
@@ -163,7 +163,7 @@ h1, h2, h3, h4 {
 }
 
 a {
-    color: #005a9e;
+    color: #0054c1;
     text-decoration: none;
 }
 

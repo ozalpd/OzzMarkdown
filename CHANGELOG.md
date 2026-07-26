@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added `Scripts\TagRelease.bat` to create and push a git tag derived from `OzzMarkdown.WPF.csproj`'s `<Version>`, with duplicate-tag detection and a confirmation prompt before tagging/pushing.
+- Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
+
+### Changed
+- Refined link colors in all built-in Markdown themes for better consistency and accessibility.
 
 ## [0.1.6] - 2026-07-26
 
