@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Refined link colors in all built-in Markdown themes for better consistency and accessibility.
 - Refreshed the SVG logo with new colors and gradients, replaced old icon and PNG assets with updated versions, and removed obsolete files. Updated the WPF project and `MainViewModel` to reference the new icon in the app and About dialog. No functional code changes—branding and resource updates only.
+- Refactored `AbstractAppSettings` and `AppVersion` to `OzzMarkdown.Core.Models` for platform-agnostic access. Updated all affected files to use the new namespace. Moved `MainWindowPosition` to `AppSettings` to keep window geometry WPF-specific. Added `using static System.Environment` in `AbstractAppSettings` for environment utilities.
 
 ## [0.1.6] - 2026-07-26
 

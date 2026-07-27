@@ -33,7 +33,7 @@ echo Creating portable ZIP package...
 echo ...
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
-    "Compress-Archive -Path '%TARGET%\*' -DestinationPath '%TARGET%\..\OzzMarkdown_%VERSION%_Portable.zip' -Force"
+    "Compress-Archive -Path '%TARGET%\*' -DestinationPath '%TARGET%\..\OzzMarkdown_%VERSION%_Windows_x64_Portable.zip' -Force"
 
 echo Portable ZIP created.
 echo Done.
