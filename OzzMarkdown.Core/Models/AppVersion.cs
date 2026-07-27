@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace OzzWpf.Core.Models;
+namespace OzzMarkdown.Core.Models;
 
 /// <summary>
 /// Provides application version information.

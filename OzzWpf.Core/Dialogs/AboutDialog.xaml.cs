@@ -1,4 +1,4 @@
-﻿using OzzWpf.Core.Models;
+﻿using OzzMarkdown.Core.Models;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media.Imaging;

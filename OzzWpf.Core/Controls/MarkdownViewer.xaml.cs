@@ -1,5 +1,5 @@
 ﻿using OzzMarkdown.Core;
-using OzzWpf.Core.Models;
+using OzzMarkdown.Core.Models;
 
 namespace OzzWpf.Core.Controls;
 

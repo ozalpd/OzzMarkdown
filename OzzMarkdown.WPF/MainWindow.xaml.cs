@@ -1,7 +1,7 @@
-﻿using OzzMarkdown.WPF.Models;
+﻿using OzzMarkdown.Core.Models;
+using OzzMarkdown.WPF.Models;
 using OzzMarkdown.WPF.ViewModels;
 using OzzWpf.Core.Controls;
-using OzzWpf.Core.Models;
 using System.Windows;
 using System.Windows.Data;
 

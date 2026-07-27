@@ -1,4 +1,5 @@
-﻿using OzzWpf.Core.Models;
+﻿using OzzMarkdown.Core.Models;
+using OzzWpf.Core.Models;
 using System.IO;
 using System.Text.Json;
 
@@ -52,6 +53,11 @@ public class AppSettings : AbstractAppSettings
     }
 
     public override string GetSettingsFolderName() => settingsFolderName;
+
+    /// <summary>
+    /// Gets or sets the position and size of the main application window.
+    /// </summary>
+    public WindowPosition MainWindowPosition { get; set; } = new WindowPosition();
 
     public void Save()
     {
