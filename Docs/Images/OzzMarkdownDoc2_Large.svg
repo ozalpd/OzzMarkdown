@@ -1,0 +1,37 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diag45" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A0CA3"/>
+      <stop offset="100%" stop-color="#7209B7"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Document -->
+  <g id="md-doc" stroke-width="72" stroke="#181818">
+    <rect x="320" y="36" width="668" height="952" rx="60" fill="#F8F8F8" />
+    <line x1="456" y1="240" x2="896" y2="240" stroke-width="96"/>
+    <line x1="456" y1="432" x2="896" y2="432" stroke-width="96"/>
+    <line x1="456" y1="624" x2="896" y2="624" stroke-width="96"/>
+  </g>
+  
+  <!-- Logo BG -->
+  <rect x="0" y="480" width="432" height="432" rx="60" fill="url(#diag45)"/>
+  
+  <!-- Downward arrow (scaled + centered) -->
+  <g id="ozzmd-arrow" stroke="#F72585" stroke-width="48" fill="none"
+     stroke-linecap="butt" stroke-linejoin="miter">
+    <!-- Vertical line -->
+    <line x1="456" y1="408" x2="456" y2="828" />
+    <!-- Arrow head -->
+    <polygon points="408,744 504,744 456,888" />
+  </g>
+  
+  <!-- Chevron M -->
+  <g id="chevron-m" stroke="#F72585" stroke-width="48" stroke-linecap="round">
+	<path d="M 72 840 L 136 624"/>
+	<path d="M 200 840 L 136 624"/>
+	<path d="M 200 840 L 266 624"/>
+	<path d="M 328 840 L 266 624"/>
+  </g>
+
+</svg>
