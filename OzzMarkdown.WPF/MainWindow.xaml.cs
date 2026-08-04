@@ -1,4 +1,5 @@
 ﻿using OzzMarkdown.Core.Models;
+using OzzMarkdown.i18n;
 using OzzMarkdown.WPF.Models;
 using OzzMarkdown.WPF.ViewModels;
 using OzzWpf.Core.Controls;
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
 {
     private readonly AppSettings _appSettings = AppSettings.GetAppSettings();
     private readonly MarkdownViewer _markdownViewer;
+    private MainViewModel _viewModel;
 
     public MainWindow()
     {
@@ -30,21 +32,40 @@ public partial class MainWindow : Window
     {
         SourceInitialized -= MainWindow_SourceInitialized;
         Title = $"Ozz Markdown - v{AppVersion.Version}";
+        _appSettings.MainWindowPosition.SetWindowPositions(this);
 
-        var viewModel = new MainViewModel();
-        DataContext = viewModel;
+        _viewModel = new MainViewModel();
+        DataContext = _viewModel;
+        _viewModel.PropertyChanged += OnPropertyChanged;
 
         _markdownViewer.SetBinding(MarkdownViewer.MarkdownContentProperty,
-                        new Binding(nameof(MainViewModel.MarkdownContent)) { Source = viewModel });
+                        new Binding(nameof(MainViewModel.MarkdownContent)) { Source = _viewModel });
         _markdownViewer.SetBinding(MarkdownViewer.GenerateTocProperty,
-                        new Binding(nameof(MainViewModel.GenerateToc)) { Source = viewModel });
+                        new Binding(nameof(MainViewModel.GenerateToc)) { Source = _viewModel });
 
-        _appSettings.MainWindowPosition.SetWindowPositions(this);
     }
 
     private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
     {
         _appSettings.MainWindowPosition.GetWindowPositions(this);
         _appSettings.Save();
+    }
+
+    private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(_viewModel.HasNewerVersion) && _viewModel.HasNewerVersion)
+        {
+            var release = _viewModel.LatestRelease;
+            var newVersion = string.Format(LocalizedStrings.NewVersionAvailable, release?.TagName);
+            var msgResult = MessageBox.Show($"{newVersion}\n\n{LocalizedStrings.WannaSeeRelease}", LocalizedStrings.UpdateAvailable, MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (msgResult == MessageBoxResult.Yes && release != null)
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = release.HtmlUrl,
+                    UseShellExecute = true
+                });
+            }
+        }
     }
 }

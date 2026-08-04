@@ -37,5 +37,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
 
 echo Portable ZIP created.
 echo Done.
+cd "%TARGET%\.."
+start .
 
 pause

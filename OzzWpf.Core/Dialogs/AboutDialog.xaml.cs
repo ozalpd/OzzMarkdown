@@ -16,10 +16,12 @@ namespace OzzWpf.Core.Dialogs
         public string Description => AppVersion.Description;
         public string Copyright => AppVersion.Copyright;
 
-        public AboutDialog()
+        public AboutDialog(IReleaseSource releaseSource)
         {
             InitializeComponent();
             DataContext = this;
+            RepoLink.NavigateUri = new Uri(releaseSource.RepositoryUrl);
+
             Deactivated += AboutDialog_Deactivated;
             Closing += AboutDialog_Closing;
         }
@@ -34,12 +36,6 @@ namespace OzzWpf.Core.Dialogs
         private void AboutDialog_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             _isClosimg = true;
-        }
-
-        public string RepoUri
-        {
-            get => RepoLink.NavigateUri.AbsoluteUri;
-            set => RepoLink.NavigateUri = new Uri(value);
         }
 
         public void LoadHighResolutionIcon(string iconPath)

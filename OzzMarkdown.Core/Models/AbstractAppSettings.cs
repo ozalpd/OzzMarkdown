@@ -27,7 +27,7 @@ namespace OzzMarkdown.Core.Models
         public void Save(string folderName, string settingsFileName)
         {
             var settingsFilePath = GetSettingsFilePath(folderName, settingsFileName);
-            var settingsJson = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            var settingsJson = JsonSerializer.Serialize(this, GetType(), new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(settingsFilePath, settingsJson);
         }
     }

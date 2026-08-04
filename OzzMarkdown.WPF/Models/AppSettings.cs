@@ -2,6 +2,7 @@
 using OzzWpf.Core.Models;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace OzzMarkdown.WPF.Models;
 
@@ -57,6 +58,7 @@ public class AppSettings : AbstractAppSettings
     /// <summary>
     /// Gets or sets the position and size of the main application window.
     /// </summary>
+    [JsonInclude]
     public WindowPosition MainWindowPosition { get; set; } = new WindowPosition();
 
     public void Save()

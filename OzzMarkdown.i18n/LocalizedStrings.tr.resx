@@ -144,4 +144,13 @@
   <data name="ViewOnGitHub" xml:space="preserve">
     <value>GitHub'da Gör</value>
   </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Yeni Güncelleme Var</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>Yeni sürüm {0} çıkmış!</value>
+  </data>
+  <data name="WannaSeeRelease" xml:space="preserve">
+    <value>Yeni sürüm sayfasını görmek ister misiniz?</value>
+  </data>
 </root>

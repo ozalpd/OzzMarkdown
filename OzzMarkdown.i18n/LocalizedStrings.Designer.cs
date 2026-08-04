@@ -115,11 +115,29 @@ namespace OzzMarkdown.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new version ({0}) is available!.
+        /// </summary>
+        public static string NewVersionAvailable {
+            get {
+                return ResourceManager.GetString("NewVersionAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open File.
         /// </summary>
         public static string OpenFile {
             get {
                 return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Available.
+        /// </summary>
+        public static string UpdateAvailable {
+            get {
+                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace OzzMarkdown.i18n {
         public static string ViewOnGitHub {
             get {
                 return ResourceManager.GetString("ViewOnGitHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to see release page?.
+        /// </summary>
+        public static string WannaSeeRelease {
+            get {
+                return ResourceManager.GetString("WannaSeeRelease", resourceCulture);
             }
         }
     }
