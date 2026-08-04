@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-10-512BD4)](https://dotnet.microsoft.com/)
 
-OzzMarkdown is a lightweight, modern Markdown reader and some editing functionality will be available in the future. It is designed to be fast, efficient, and easy to use.
+OzzMarkdown is a modern Markdown reader and some editing functionality will be available in the future. It is designed to be fast, efficient, and easy to use.
 
 It focuses on clean rendering, developer‑friendly utilities, and optional workflows for LLM enthusiasts.
 
@@ -35,24 +35,34 @@ The WPF frontend uses MVVM. Shared WPF resources — a `Styles.xaml` resource di
 ```
 OzzMarkdown/
 ├── OzzMarkdown.Core/         # Platform-agnostic Markdown rendering engine
-│   ├── Assets/                  # Embedded Prism.js syntax-highlighting assets (minified JS/CSS themes)
+│   ├── Assets/                  # Embedded Prism.js syntax-highlighting assets (JS/CSS themes)
+│   ├── Extensions/
+│   │   └── ReleaseSourceExtensions.cs  # Extension helpers for release-source models
 │   ├── Helpers/
 │   │   └── ResourceLoader.cs    # Loads embedded resources (e.g., Prism.js assets) as strings
+│   ├── Models/
+│   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
+│   │   ├── AppVersion.cs             # Assembly version/metadata accessor
+│   │   ├── GitHubAsset.cs            # GitHub release asset model
+│   │   ├── GitHubRelease.cs          # GitHub release model
+│   │   └── IReleaseSource.cs         # Abstraction over release-source providers
 │   ├── MarkdownHtmlRenderer.cs   # Renders Markdown to a temp HTML file / virtual-host URL
 │   ├── MarkdownTheme.cs          # CSS theme record
-│   └── MarkdownThemeProvider.cs  # Built-in theme registry (Light, etc.)
+│   ├── MarkdownThemeProvider.cs  # Built-in theme registry (Light, etc.)
+│   └── bundleconfig.json         # Bundling/minification config for Prism.js assets
 │
 ├── OzzWpf.Core/               # Shared WPF building blocks (used by WPF-based frontends/tools)
 │   ├── Commands/
+│   │   ├── AbstractCommand.cs
 │   │   └── RelayCommand.cs
 │   ├── Controls/
 │   │   └── MarkdownViewer.xaml(.cs)  # WebView2-based Markdown viewer control
 │   ├── Dialogs/
 │   │   └── AboutDialog.xaml(.cs)     # Shared About window (product/version/copyright info)
+│   ├── Helpers/
+│   │   └── BindingProxy.cs       # Enables data binding across elements without a shared DataContext
 │   ├── Models/
-│   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
-│   │   ├── AppVersion.cs             # Assembly version/metadata accessor
-│   │   └── WindowPosition.cs         # Window geometry capture/restore helper
+│   │   └── WindowPosition.cs     # Window geometry capture/restore helper
 │   ├── Resources/
 │   │   ├── Styles.xaml           # Shared control styles
 │   │   └── BootstrapIcons.xaml   # Bootstrap Icons v1.13.1 as Geometry resources
@@ -60,13 +70,17 @@ OzzMarkdown/
 │       └── AbstractViewModel.cs
 │
 ├── OzzMarkdown.WPF/            # WPF desktop frontend (MVVM)
+│   ├── Assets/
+│   │   └── icon-M-03.ico         # Application icon
 │   ├── Models/
-│   │   └── AppSettings.cs        # Concrete, persisted app settings singleton
+│   │   ├── AppSettings.cs        # Concrete, persisted app settings singleton
+│   │   └── ReleaseSource.cs      # WPF-specific release-source implementation
 │   ├── Services/
 │   │   ├── IFileDialogService.cs     # Abstraction over native file dialogs
 │   │   └── Win32FileDialogService.cs # Win32-backed implementation
 │   ├── ViewModels/
 │   │   └── MainViewModel.cs
+│   ├── App.xaml(.cs)
 │   └── MainWindow.xaml(.cs)
 │
 ├── OzzMarkdown.i18n/           # Shared localization (English + Turkish .resx)

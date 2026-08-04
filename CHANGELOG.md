@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.7] - 2026-08-04
 
 ### Added
 - Added `Scripts\TagRelease.bat` to create and push a git tag derived from `OzzMarkdown.WPF.csproj`'s `<Version>`, with duplicate-tag detection and a confirmation prompt before tagging/pushing.
@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Localization support (English and Turkish) via `OzzMarkdown.i18n`.
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
+[0.1.7]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.7
 [0.1.6]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.6
 [0.1.4]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.4
 ...
