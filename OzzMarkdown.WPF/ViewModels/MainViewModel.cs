@@ -26,7 +26,7 @@ public class MainViewModel : AbstractViewModel
         OpenFileCommand = new RelayCommand(async () => await OpenMarkdownFileAsync());
         ShowAboutCommand = new RelayCommand(ShowAboutDialog);
 
-        //_ = Task.Run(CheckForUpdatesAsync);
+        _ = Task.Run(CheckForUpdatesAsync);
     }
 
 
