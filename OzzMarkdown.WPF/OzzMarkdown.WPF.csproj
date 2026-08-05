@@ -13,11 +13,12 @@
 		<Description>Ozz Markdown is a lightweight Markdown viewer and editor.</Description>
 		<Copyright>Copyright © 2026</Copyright>
 		
-		<Version>0.1.7</Version>
+		<Version>0.1.8</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Resource Include="Assets\icon-M-03.ico" />
+		<Resource Include="Assets\icon-doc-M-03.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -24,6 +24,7 @@ move /Y OzzMarkdown.Setup.tmp "%TARGET%\..\OzzMarkdown.Setup.iss"
 
 echo ...
 xcopy "%SOURCE%\*.dll" "%TARGET%" /Y
+xcopy "..\OzzMarkdown.WPF\Assets\icon-doc-M-03.ico" "%TARGET%\Assets\" /Y
 xcopy "%SOURCE%\*.exe" "%TARGET%" /Y
 xcopy "%SOURCE%\*.json" "%TARGET%" /Y
 xcopy "%SOURCE%\runtimes\win-x64\native\." "%TARGET%\runtimes\win-x64\native\" /E /Y

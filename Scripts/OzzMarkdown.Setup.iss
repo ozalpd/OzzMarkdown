@@ -16,6 +16,8 @@ WizardStyle=modern
 OutputDir=.
 Compression=lzma
 SolidCompression=yes
+[Tasks]
+Name: "associatemd"; Description: "Associate .md files with OzzMarkdown and set its icon"; GroupDescription: "File associations:"; Flags: unchecked
 [Files]
 Source: "OzzMarkdown\OzzMarkdown.WPF.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OzzMarkdown\OzzMarkdown.WPF.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -31,13 +33,31 @@ Source: "OzzMarkdown\Microsoft.Web.WebView2.WinForms.dll"; DestDir: "{app}"; Fla
 Source: "OzzMarkdown\Microsoft.Web.WebView2.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OzzMarkdown\runtimes\win-x64\native\WebView2Loader.dll"; DestDir: "{app}\runtimes\win-x64\native"; Flags: ignoreversion
 Source: "OzzMarkdown\tr\OzzMarkdown.i18n.resources.dll"; DestDir: "{app}\tr"; Flags: ignoreversion
+Source: "OzzMarkdown\Assets\icon-doc-M-03.ico"; DestDir: "{app}\Assets"; Flags: ignoreversion
 [Icons]
 Name: "{group}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
 Name: "{commondesktop}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
+[Registry]
+Root: HKA; Subkey: "Software\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "OzzMarkdown.MarkdownFile"; Flags: uninsdeletevalue; Tasks: associatemd
+Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile"; ValueType: string; ValueName: ""; ValueData: "Markdown Document"; Flags: uninsdeletekey; Tasks: associatemd
+Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Assets\icon-doc-M-03.ico"; Tasks: associatemd
+Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\OzzMarkdown.WPF.exe"" ""%1"""; Tasks: associatemd
 [Run]
 Filename: "{app}\OzzMarkdown.WPF.exe"; Description: "Launch OzzMarkdown"; Flags: nowait postinstall skipifsilent
 
 [Code]
+const
+  SHCNE_ASSOCCHANGED = $8000000;
+  SHCNF_IDLIST = $0;
+
+procedure SHChangeNotify(wEventId: Longint; uFlags: Longint; dwItem1: Longint; dwItem2: Longint);
+external 'SHChangeNotify@shell32.dll stdcall';
+
+procedure RefreshShellIcons();
+begin
+  SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, 0, 0);
+end;
+
 function IsDotNetDesktopRuntimeInstalled(): Boolean;
 var
   DotNetSharedPath: String;
@@ -74,4 +94,10 @@ begin
       Result := False;
     end;
   end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep = ssPostInstall) and WizardIsTaskSelected('associatemd') then
+    RefreshShellIcons();
 end;

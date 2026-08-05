@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2026-08-05
+
+### Added
+- Added an optional "Associate .md files with OzzMarkdown and set its icon" task to `OzzMarkdown.Setup.iss`, registering `.md` files under `HKA\Software\Classes` (ProgID `OzzMarkdown.MarkdownFile`) with `Assets\icon-doc-M-03.ico` as the file icon and `OzzMarkdown.WPF.exe "%1"` as the open command; refreshes Explorer's shell icon cache via `SHChangeNotify` after install when the task is selected.
+- Added support for opening a Markdown file passed by the OS (e.g. via double-click on an associated `.md` file): `App.OnStartup` now reads the launch arguments and passes the file path to a new `MainWindow(string? filePathToOpen)` constructor overload, which loads it through a new `MainViewModel.LoadMarkdownFileAsync` method once the view model is initialized.
+
 ## [0.1.7] - 2026-08-04
 
 ### Added
@@ -75,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Localization support (English and Turkish) via `OzzMarkdown.i18n`.
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
+[0.1.8]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.8
 [0.1.7]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.7
 [0.1.6]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.6
 [0.1.4]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.4

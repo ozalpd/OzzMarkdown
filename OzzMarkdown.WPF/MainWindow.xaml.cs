@@ -15,12 +15,16 @@ public partial class MainWindow : Window
 {
     private readonly AppSettings _appSettings = AppSettings.GetAppSettings();
     private readonly MarkdownViewer _markdownViewer;
+    private readonly string? _filePathToOpen;
     private MainViewModel _viewModel;
 
-    public MainWindow()
+    public MainWindow() : this(null) { }
+
+    public MainWindow(string? filePathToOpen)
     {
         InitializeComponent();
 
+        _filePathToOpen = filePathToOpen;
         _markdownViewer = new MarkdownViewer(_appSettings);
         MarkdownViewerHost.Content = _markdownViewer;
 
@@ -43,6 +47,10 @@ public partial class MainWindow : Window
         _markdownViewer.SetBinding(MarkdownViewer.GenerateTocProperty,
                         new Binding(nameof(MainViewModel.GenerateToc)) { Source = _viewModel });
 
+        if (!string.IsNullOrEmpty(_filePathToOpen))
+        {
+            _ = _viewModel.LoadMarkdownFileAsync(_filePathToOpen);
+        }
     }
 
     private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
