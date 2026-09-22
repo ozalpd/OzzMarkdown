@@ -13,6 +13,30 @@ namespace OzzMarkdown.Core.Models
 
         public string SelectedTheme { get; set; } = "Light";
 
+        /// <summary>
+        /// Most recently used files, most recent first.
+        /// </summary>
+        public List<string> RecentFiles { get; set; } = new();
+
+        /// <summary>
+        /// Adds <paramref name="filePath"/> to the top of <see cref="RecentFiles"/>, removing any
+        /// existing entry (case-insensitive) and trimming the list to <paramref name="maxCount"/> items.
+        /// </summary>
+        public void AddRecentFile(string filePath, int maxCount = 10)
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                return;
+            }
+
+            RecentFiles.RemoveAll(f => string.Equals(f, filePath, StringComparison.OrdinalIgnoreCase));
+            RecentFiles.Insert(0, filePath);
+
+            if (RecentFiles.Count > maxCount)
+            {
+                RecentFiles.RemoveRange(maxCount, RecentFiles.Count - maxCount);
+            }
+        }
 
         public abstract string GetSettingsFolderName();
 

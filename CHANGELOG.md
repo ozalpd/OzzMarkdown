@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.9] - 2026-09-22
+
+### Added
+- Added a Recent Files list that persists opened Markdown file paths in application settings and provides a WPF toolbar ComboBox for reopening them.
+
 ## [0.1.8] - 2026-08-05
 
 ### Added
@@ -81,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Localization support (English and Turkish) via `OzzMarkdown.i18n`.
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
+[0.1.9]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.9
 [0.1.8]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.8
 [0.1.7]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.7
 [0.1.6]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.6

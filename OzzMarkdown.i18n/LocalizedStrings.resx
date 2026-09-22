@@ -153,4 +153,7 @@
   <data name="WannaSeeRelease" xml:space="preserve">
     <value>Do you want to see release page?</value>
   </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>Recent Markdown files</value>
+  </data>
 </root>

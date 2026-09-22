@@ -5,6 +5,7 @@ using OzzMarkdown.WPF.Services;
 using OzzWpf.Core.Commands;
 using OzzWpf.Core.Dialogs;
 using OzzWpf.Core.ViewModels;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 
@@ -25,6 +26,12 @@ public class MainViewModel : AbstractViewModel
         CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
         OpenFileCommand = new RelayCommand(async () => await OpenMarkdownFileAsync());
         ShowAboutCommand = new RelayCommand(ShowAboutDialog);
+
+        var settings = AppSettings.GetAppSettings();
+        foreach (var path in settings.RecentFiles.Where(File.Exists))
+        {
+            RecentFiles.Add(path);
+        }
 
         _ = Task.Run(CheckForUpdatesAsync);
     }
@@ -94,6 +101,27 @@ public class MainViewModel : AbstractViewModel
     }
     private string? _markdownContent;
 
+
+    private void AddRecentFile(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return;
+        }
+
+        var existing = RecentFiles.FirstOrDefault(
+            p => string.Equals(p, path, StringComparison.OrdinalIgnoreCase));
+        if (existing != null)
+        {
+            RecentFiles.Remove(existing);
+        }
+        RecentFiles.Insert(0, path);
+
+        var settings = AppSettings.GetAppSettings();
+        settings.AddRecentFile(path);
+        settings.Save();
+    }
+
     private async Task CheckForUpdatesAsync()
     {
         try
@@ -135,10 +163,26 @@ public class MainViewModel : AbstractViewModel
             string markdownContent = await File.ReadAllTextAsync(filePath);
             MarkdownContent = markdownContent;
             CurrentFilePath = filePath;
+            AddRecentFile(filePath);
         }
         catch (Exception ex)
         {
             // Handle exceptions (e.g., log them or show a message to the user)
+        }
+    }
+
+    public ObservableCollection<string> RecentFiles { get; } = new();
+
+    public string? SelectedRecentFile
+    {
+        get => null;
+        set
+        {
+            RaisePropertyChanged(nameof(SelectedRecentFile));
+            if (!string.IsNullOrEmpty(value) && File.Exists(value))
+            {
+                _ = LoadMarkdownFileAsync(value);
+            }
         }
     }
 

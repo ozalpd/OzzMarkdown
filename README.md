@@ -12,6 +12,7 @@ It focuses on clean rendering, developer‑friendly utilities, and optional work
 - Fast, clean Markdown rendering
 - Cross-project shared core library (`OzzMarkdown.Core`)
 - MVVM-based WPF desktop frontend
+- Recent-file history with persistence and a toolbar selector
 - Built-in English and Turkish localization
 - Bootstrap Icons integrated as native WPF resources
 
@@ -41,7 +42,7 @@ OzzMarkdown/
 │   ├── Helpers/
 │   │   └── ResourceLoader.cs    # Loads embedded resources (e.g., Prism.js assets) as strings
 │   ├── Models/
-│   │   ├── AbstractAppSettings.cs    # Base class for persisted app settings
+│   │   ├── AbstractAppSettings.cs    # Base app settings, including persisted recent-file history
 │   │   ├── AppVersion.cs             # Assembly version/metadata accessor
 │   │   ├── GitHubAsset.cs            # GitHub release asset model
 │   │   ├── GitHubRelease.cs          # GitHub release model

@@ -153,4 +153,7 @@
   <data name="WannaSeeRelease" xml:space="preserve">
     <value>Yeni sürüm sayfasını görmek ister misiniz?</value>
   </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>Son Markdown Dosyaları</value>
+  </data>
 </root>

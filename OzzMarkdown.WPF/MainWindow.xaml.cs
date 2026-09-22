@@ -76,4 +76,10 @@ public partial class MainWindow : Window
             }
         }
     }
+
+    private void RecentFilesLabel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        cboRecentFiles.IsDropDownOpen = true;
+        e.Handled = true;
+    }
 }

@@ -133,6 +133,15 @@ namespace OzzMarkdown.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Markdown files.
+        /// </summary>
+        public static string RecentFiles {
+            get {
+                return ResourceManager.GetString("RecentFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Available.
         /// </summary>
         public static string UpdateAvailable {
