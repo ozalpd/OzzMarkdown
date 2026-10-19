@@ -91,6 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Localization support (English and Turkish) via `OzzMarkdown.i18n`.
 
 [Unreleased]: https://github.com/ozalpd/OzzMarkdown/commits/main
+[0.1.10]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.10
 [0.1.9]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.9
 [0.1.8]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.8
 [0.1.7]: https://github.com/ozalpd/OzzMarkdown/releases/tag/v0.1.7
