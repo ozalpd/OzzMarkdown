@@ -88,6 +88,24 @@ namespace OzzMarkdown.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file &apos;{0}&apos; does not exist..
+        /// </summary>
+        public static string FileNotExist {
+            get {
+                return ResourceManager.GetString("FileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Not Found.
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate TOC.
         /// </summary>
         public static string GenerateToc {

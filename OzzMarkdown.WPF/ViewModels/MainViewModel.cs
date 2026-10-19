@@ -1,5 +1,6 @@
 using OzzMarkdown.Core.Extensions;
 using OzzMarkdown.Core.Models;
+using OzzMarkdown.i18n;
 using OzzMarkdown.WPF.Models;
 using OzzMarkdown.WPF.Services;
 using OzzWpf.Core.Commands;
@@ -182,6 +183,14 @@ public class MainViewModel : AbstractViewModel
             if (!string.IsNullOrEmpty(value) && File.Exists(value))
             {
                 _ = LoadMarkdownFileAsync(value);
+            }
+            else if (!string.IsNullOrEmpty(value))
+            {
+                MessageBox.Show(string.Format(LocalizedStrings.FileNotExist, value),
+                                LocalizedStrings.FileNotFound, MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                RecentFiles.Remove(value);
+                RaisePropertyChanged(nameof(RecentFiles));
             }
         }
     }
