@@ -1,23 +1,23 @@
 #define MyAppVersion "0.0.0"
 [Setup]
 AppId={{DBA8D0C5-AAB9-416A-ACD4-D5B45140B0B8}
-AppName=OzzMarkdown
+AppName=Ozz Markdown
 AppVersion={#MyAppVersion}
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 OutputBaseFilename=OzzMarkdown_{#MyAppVersion}_Windows_x64_Installer
 DefaultDirName={autopf}\OzzMarkdown
-DefaultGroupName=OzzMarkdown
-AppVerName=OzzMarkdown v{#MyAppVersion}
+DefaultGroupName=Ozz Markdown
+AppVerName=Ozz Markdown v{#MyAppVersion}
 VersionInfoProductVersion={#MyAppVersion}
-VersionInfoDescription=OzzMarkdown Installer v{#MyAppVersion}
+VersionInfoDescription=Ozz Markdown Installer v{#MyAppVersion}
 UninstallDisplayIcon={app}\OzzMarkdown.WPF.exe
 WizardStyle=modern
 OutputDir=.
 Compression=lzma
 SolidCompression=yes
 [Tasks]
-Name: "associatemd"; Description: "Associate .md files with OzzMarkdown and set its icon"; GroupDescription: "File associations:"; Flags: unchecked
+Name: "associatemd"; Description: "Associate .md files with Ozz Markdown and set its icon"; GroupDescription: "File associations:"; Flags: unchecked
 [Files]
 Source: "OzzMarkdown\OzzMarkdown.WPF.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OzzMarkdown\OzzMarkdown.WPF.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -35,15 +35,15 @@ Source: "OzzMarkdown\runtimes\win-x64\native\WebView2Loader.dll"; DestDir: "{app
 Source: "OzzMarkdown\tr\OzzMarkdown.i18n.resources.dll"; DestDir: "{app}\tr"; Flags: ignoreversion
 Source: "OzzMarkdown\Assets\icon-doc-M-03.ico"; DestDir: "{app}\Assets"; Flags: ignoreversion
 [Icons]
-Name: "{group}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
-Name: "{commondesktop}\OzzMarkdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
+Name: "{group}\Ozz Markdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
+Name: "{commondesktop}\Ozz Markdown"; Filename: "{app}\OzzMarkdown.WPF.exe"
 [Registry]
 Root: HKA; Subkey: "Software\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "OzzMarkdown.MarkdownFile"; Flags: uninsdeletevalue; Tasks: associatemd
 Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile"; ValueType: string; ValueName: ""; ValueData: "Markdown Document"; Flags: uninsdeletekey; Tasks: associatemd
 Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Assets\icon-doc-M-03.ico"; Tasks: associatemd
 Root: HKA; Subkey: "Software\Classes\OzzMarkdown.MarkdownFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\OzzMarkdown.WPF.exe"" ""%1"""; Tasks: associatemd
 [Run]
-Filename: "{app}\OzzMarkdown.WPF.exe"; Description: "Launch OzzMarkdown"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\OzzMarkdown.WPF.exe"; Description: "Launch Ozz Markdown"; Flags: nowait postinstall skipifsilent
 
 [Code]
 const
@@ -85,7 +85,7 @@ begin
   Result := True;
   if not IsDotNetDesktopRuntimeInstalled() then
   begin
-    if MsgBox('OzzMarkdown requires the .NET 10 Desktop Runtime, which was not detected on this computer.' + #13#10 + #13#10 +
+    if MsgBox('Ozz Markdown requires the .NET 10 Desktop Runtime, which was not detected on this computer.' + #13#10 + #13#10 +
       'Click OK to open the download page in your browser. After installing the runtime, re-run this installer.' + #13#10 + #13#10 +
       'Click Cancel to continue installing anyway (the application will not run without the runtime).',
       mbConfirmation, MB_OKCANCEL) = IDOK then
